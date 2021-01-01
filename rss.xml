@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabe's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 01 Jan 2021 04:04:11 GMT</lastBuildDate><item><title><![CDATA[TDD – Test-Driven Development]]></title><description><![CDATA[What is TDD? TDD stands for Test-Driven Development and it is a Software
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabe's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 01 Jan 2021 04:49:26 GMT</lastBuildDate><item><title><![CDATA[TDD (Test-Driven Development) - My personal journey]]></title><description><![CDATA[What is TDD? TDD stands for Test-Driven Development and it is a Software
 Development’s process that was credited to Kent
 Beck.  The idea…]]></description><link>https://alabeduarte.com/tdd/</link><guid isPermaLink="false">https://alabeduarte.com/tdd/</guid><pubDate>Fri, 01 Jan 2021 14:00:00 GMT</pubDate><content:encoded>&lt;p&gt;What is TDD? TDD stands for Test-Driven Development and it is a Software
 Development’s process that was credited to &lt;a href=&quot;https://www.kentbeck.com/&quot;&gt;Kent
@@ -87,11 +87,11 @@ came from.&lt;/p&gt;
 &lt;p&gt;I’ve started reading about TDD on the internet and what helped me the most in my
 first steps were the articles from the &lt;a href=&quot;https://www.caelum.com.br&quot;&gt;Caelum&lt;/a&gt;
 website. I found really nice examples of how to do it at the time through their
-articles and further I found books which led me to the formal definitions
-written by Kent Beck. Then I joined &lt;a href=&quot;https://www.thoughtworks.com&quot;&gt;ThoughtWorks&lt;/a&gt;
-in 2011 and there I believe it was a turning point for me. ThoughtWorks is
-famous for its revolutionary mindset (look for &lt;a href=&quot;https://agilemanifesto.org&quot;&gt;the agile
-manifesto&lt;/a&gt;), the &lt;a href=&quot;https://www.thoughtworks.com/radar&quot;&gt;Tech
+articles and further I found &lt;a href=&quot;https://alabeduarte.com/&quot;&gt;books&lt;/a&gt; which led me to
+the formal definitions written by Kent Beck. Then I joined
+&lt;a href=&quot;https://www.thoughtworks.com&quot;&gt;ThoughtWorks&lt;/a&gt; in 2011 and there I believe it was
+a turning point for me. ThoughtWorks is famous for its revolutionary mindset
+(look for &lt;a href=&quot;https://agilemanifesto.org&quot;&gt;the agile manifesto&lt;/a&gt;), the &lt;a href=&quot;https://www.thoughtworks.com/radar&quot;&gt;Tech
 Radar&lt;/a&gt; publications and for caring about
 code quality. However, the reason I believe working there was so important was
 because of the people that I had a chance to work with at the time. They really
@@ -179,7 +179,7 @@ browser or mobile device) myself and test it out. While coding, it should be
 quick to trigger the tests as well. Nowadays, most programming languages’
 ecosystems contain some tool where it watches your code and whenever you save a
 file, the tests relevant to that file will run. That is the sweet spot, in my
-opinion.  Final thoughts and when doing TDD doesn’t help&lt;/p&gt;
+opinion.  Final thoughts and when doing TDD doesn’t help.&lt;/p&gt;
 &lt;p&gt;I believe that Test-Driven Development doesn’t help when we are not quite
 certain about what to do and what to expect. Sometimes, you might not be
 familiar with the language, framework or platform and you might need some time
@@ -205,7 +205,13 @@ Example&lt;/a&gt;&lt;/li&gt;
 Tests&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W&quot;&gt;Test-Driven Development: Teste e Design no Mundo Real (Portuguese
 Edition)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[About me]]></title><description><![CDATA[Background Software Engineer since 2007, my professional career has given me a
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[This Blog]]></title><description><![CDATA[I’ve had some opportunities to write blogs and documents throgout my career but
+I always deferred the moment to atually write my own stuff…]]></description><link>https://alabeduarte.com/this-blog/</link><guid isPermaLink="false">https://alabeduarte.com/this-blog/</guid><pubDate>Fri, 01 Jan 2021 13:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve had some opportunities to write blogs and documents throgout my career but
+I always deferred the moment to atually write my own stuff.&lt;/p&gt;
+&lt;p&gt;Now, I’m finally ready – I guess. The idea is document and share my learnings so
+that you – dear reader – and myself can come back later and check things out. I
+hope you enjoy the blog and I’d love to get some feedback. To do so, feel free
+to contact me via email: alabeduarte@gmail.com.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[About me]]></title><description><![CDATA[Background Software Engineer since 2007, my professional career has given me a
 great experience building applications in many different…]]></description><link>https://alabeduarte.com/about-me/</link><guid isPermaLink="false">https://alabeduarte.com/about-me/</guid><pubDate>Fri, 01 Jan 2021 12:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Background&lt;/h2&gt;
 &lt;p&gt;Software Engineer since 2007, my professional career has given me a
 great experience building applications in many different languages and domains
