@@ -1,8 +1,7 @@
 ---
-title: TDD – Test-Driven Development
+title: TDD (Test-Driven Development) - My personal journey
 date: "2021-01-01T14:00:00.000Z"
-description: "Article that describes my personal exposure with TDD over the
-years."
+description: "My personal exposure with TDD over the years."
 ---
 
 What is TDD? TDD stands for Test-Driven Development and it is a Software
@@ -140,7 +139,7 @@ browser or mobile device) myself and test it out. While coding, it should be
 quick to trigger the tests as well. Nowadays, most programming languages'
 ecosystems contain some tool where it watches your code and whenever you save a
 file, the tests relevant to that file will run. That is the sweet spot, in my
-opinion.  Final thoughts and when doing TDD doesn’t help
+opinion.  Final thoughts and when doing TDD doesn’t help.
 
 I believe that Test-Driven Development doesn’t help when we are not quite
 certain about what to do and what to expect. Sometimes, you might not be
