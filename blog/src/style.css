@@ -305,7 +305,6 @@ a:focus {
 .bio-social {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 }
 
 .blog-post header h1 {
