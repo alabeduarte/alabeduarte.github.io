@@ -1,0 +1,11 @@
+{
+  "name": "alabeduarte.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alabeduarte/alabeduarte.github.io.git",
+  "author": "Alabe Duarte <alabeduarte@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby": "^2.29.3"
+  }
+}
