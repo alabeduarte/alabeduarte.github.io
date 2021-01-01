@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabe's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 01 Jan 2021 04:56:07 GMT</lastBuildDate><item><title><![CDATA[TDD (Test-Driven Development) - My personal journey]]></title><description><![CDATA[What is TDD? TDD stands for Test-Driven Development and it is a Software
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabe's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 01 Jan 2021 13:21:16 GMT</lastBuildDate><item><title><![CDATA[TDD (Test-Driven Development) - My personal journey]]></title><description><![CDATA[What is TDD? TDD stands for Test-Driven Development and it is a Software
 Development’s process that was credited to Kent
 Beck.  The idea…]]></description><link>https://alabeduarte.com/tdd/</link><guid isPermaLink="false">https://alabeduarte.com/tdd/</guid><pubDate>Fri, 01 Jan 2021 14:00:00 GMT</pubDate><content:encoded>&lt;p&gt;What is TDD? TDD stands for Test-Driven Development and it is a Software
 Development’s process that was credited to &lt;a href=&quot;https://www.kentbeck.com/&quot;&gt;Kent
@@ -131,12 +131,12 @@ the answer to this question doesn’t feel quite right, you can use this
 opportunity to change your code and look at your unit tests again and imagine:
 “how will someone call this code in real life? Is it easy to read?”.&lt;/p&gt;
 &lt;p&gt;Sometimes, “For a given input, I expect this output” is not possible.  You could
-argue that it is not that simple, sometimes it is not easy to structure input
-and expected output. But, for me, that’s the key. The fact that might not be
-possible all times doesn’t change the fact that you can always think about it
-and make it as an exercise. Challenge yourself often and see if this is really
-the case. If not, try breaking down your code into smaller components and then
-ask this question again.&lt;/p&gt;
+argue that it is not that simple as sometimes it is not easy to structure input
+and expected output. However, The fact that might not be possible all times
+doesn’t change the fact that you can always think about it and make it as an
+exercise. Challenge yourself often and see if this is really the case. If not,
+try breaking down your code into smaller components and then ask this question
+again.&lt;/p&gt;
 &lt;h3&gt;Good code design is pretty subjective!&lt;/h3&gt;
 &lt;p&gt;YES! That is it! If I’m coding all by myself I’m pretty sure I’ll understand it
 all and every decision will make sense until I have to explain to someone.
@@ -144,10 +144,10 @@ That’s how pair programming and/or code review becomes crucial here. The proce
 of doing TDD evolves empathy as well. I tend to think that we need to solve some
 problems right away, but often when I share my thoughts with someone I realise
 that I’m thinking too far ahead. Conversations like that can help you to avoid
-overengineering and premature decisions. As we know by now, our tests are the
-first consumers of our code, so lean on that and discuss with your peers whether
-this is really a good design. Here are some questions that I often try to ask
-myself:&lt;/p&gt;
+overengineering and make decisions prematurely. As we know by now, our tests are
+the first consumers of our code, so lean on that and discuss with your peers
+whether this is really a good design. Here are some questions that I often try
+to ask myself:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; Is my code easy to maintain?&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; Is my code easy to change?&lt;/li&gt;
@@ -179,7 +179,8 @@ browser or mobile device) myself and test it out. While coding, it should be
 quick to trigger the tests as well. Nowadays, most programming languages’
 ecosystems contain some tool where it watches your code and whenever you save a
 file, the tests relevant to that file will run. That is the sweet spot, in my
-opinion.  Final thoughts and when doing TDD doesn’t help.&lt;/p&gt;
+opinion.&lt;/p&gt;
+&lt;h3&gt;Final thoughts and when doing TDD doesn’t help&lt;/h3&gt;
 &lt;p&gt;I believe that Test-Driven Development doesn’t help when we are not quite
 certain about what to do and what to expect. Sometimes, you might not be
 familiar with the language, framework or platform and you might need some time
