@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabe's Blog]]></title><description><![CDATA[This is where I'll post my thoughts and share]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 01 Jan 2021 01:22:04 GMT</lastBuildDate><item><title><![CDATA[Who am I?]]></title><description><![CDATA[Background Software Engineer since 2007, my professional career has given me a
+great experience building applications in many different…]]></description><link>https://alabeduarte.com/who-am-i/</link><guid isPermaLink="false">https://alabeduarte.com/who-am-i/</guid><pubDate>Fri, 01 Jan 2021 12:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;Software Engineer since 2007, my professional career has given me a
+great experience building applications in many different languages and domains
+spanning health, energy/oil/gas, media and retail. I am a quality-focused
+engineer with over 5 years of experience leading technical teams of 10+
+including coaching and mentoring offshore teams.&lt;/p&gt;
+&lt;p&gt;I have a solid understanding of object-oriented programming and functional
+programming paradigms applied with extensive experience on test-driven
+development (TDD) and pair programming techniques. I have delivered production
+applications in many different languages and platforms including Go, Elixir,
+Ruby, Javascript/Typescript, Scala, Java, Android and iOS.&lt;/p&gt;
+&lt;h2&gt;Values&lt;/h2&gt;
+&lt;p&gt;I believe in transparency, servant leadership and constant — two-way —
+feedback. I’m constantly challenging user’s value and scope and I feel pretty
+excited about social impact. I also believe that people can do amazing things
+given the right opportunity, and I also believe that opportunities can be
+created.&lt;/p&gt;
+&lt;p&gt;I also enjoy speaking/attending conferences, coaching, sharing knowledge and
+contributing back to the software community.&lt;/p&gt;
+&lt;p&gt;Ways of working: I have led a number of programs on the path of continuous
+delivery, with a focus on technical capability uplift and the realisation of
+benefits including shorter cycle time of features released to end-users.&lt;/p&gt;
+&lt;p&gt;I consider myself an easy-going person. I tend to avoid challenging the status
+quo without building a rapport around the environment and I try to listen and
+learn how things work first.&lt;/p&gt;
+&lt;p&gt;I appreciate knowledge sharing, thoughtful code reviews and pair programming. I
+wouldn’t be so confident and happy about my career if I didn’t have the input
+from the people that I had the chance to work with.&lt;/p&gt;
+&lt;p&gt;I like to apply TDD whenever is possible and I try to keep my changes small. I
+also believe in discipline and code that favours the ability to refactor and
+good design. I understand that good design is subjective, so I tend to ask some
+key questions while I’m coding, such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Is my code easy to maintain?&lt;/li&gt;
+&lt;li&gt;Is my code easy to change?&lt;/li&gt;
+&lt;li&gt;Is my code easy to read?&lt;/li&gt;
+&lt;li&gt;Is my code expressive enough?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When doing code review, I tend to be flexible by encouraging follow-up PRs to
+address minor changes so that features can be unblocked as smaller PRs are being
+shipped. That also means a smaller scope of changes and fewer risks of breaking
+things.&lt;/p&gt;</content:encoded></item></channel></rss>
