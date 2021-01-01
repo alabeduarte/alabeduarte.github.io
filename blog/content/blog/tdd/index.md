@@ -35,11 +35,11 @@ came from.
 I’ve started reading about TDD on the internet and what helped me the most in my
 first steps were the articles from the [Caelum](https://www.caelum.com.br)
 website. I found really nice examples of how to do it at the time through their
-articles and further I found books which led me to the formal definitions
-written by Kent Beck. Then I joined [ThoughtWorks](https://www.thoughtworks.com)
-in 2011 and there I believe it was a turning point for me. ThoughtWorks is
-famous for its revolutionary mindset (look for [the agile
-manifesto](https://agilemanifesto.org)), the [Tech
+articles and further I found [books](https://alabeduarte.com/) which led me to
+the formal definitions written by Kent Beck. Then I joined
+[ThoughtWorks](https://www.thoughtworks.com) in 2011 and there I believe it was
+a turning point for me. ThoughtWorks is famous for its revolutionary mindset
+(look for [the agile manifesto](https://agilemanifesto.org)), the [Tech
 Radar](https://www.thoughtworks.com/radar) publications and for caring about
 code quality. However, the reason I believe working there was so important was
 because of the people that I had a chance to work with at the time. They really
