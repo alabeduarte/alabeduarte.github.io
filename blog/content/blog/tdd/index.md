@@ -85,12 +85,12 @@ opportunity to change your code and look at your unit tests again and imagine:
 “how will someone call this code in real life? Is it easy to read?”.
 
 Sometimes, “For a given input, I expect this output” is not possible.  You could
-argue that it is not that simple, sometimes it is not easy to structure input
-and expected output. But, for me, that’s the key. The fact that might not be
-possible all times doesn’t change the fact that you can always think about it
-and make it as an exercise. Challenge yourself often and see if this is really
-the case. If not, try breaking down your code into smaller components and then
-ask this question again.
+argue that it is not that simple as sometimes it is not easy to structure input
+and expected output. However, The fact that might not be possible all times
+doesn’t change the fact that you can always think about it and make it as an
+exercise. Challenge yourself often and see if this is really the case. If not,
+try breaking down your code into smaller components and then ask this question
+again.
 
 ### Good code design is pretty subjective!
 
@@ -100,10 +100,10 @@ That’s how pair programming and/or code review becomes crucial here. The proce
 of doing TDD evolves empathy as well. I tend to think that we need to solve some
 problems right away, but often when I share my thoughts with someone I realise
 that I’m thinking too far ahead. Conversations like that can help you to avoid
-overengineering and premature decisions. As we know by now, our tests are the
-first consumers of our code, so lean on that and discuss with your peers whether
-this is really a good design. Here are some questions that I often try to ask
-myself:
+overengineering and make decisions prematurely. As we know by now, our tests are
+the first consumers of our code, so lean on that and discuss with your peers
+whether this is really a good design. Here are some questions that I often try
+to ask myself:
 
 * [x] Is my code easy to maintain?
 * [x] Is my code easy to change?
@@ -139,7 +139,9 @@ browser or mobile device) myself and test it out. While coding, it should be
 quick to trigger the tests as well. Nowadays, most programming languages'
 ecosystems contain some tool where it watches your code and whenever you save a
 file, the tests relevant to that file will run. That is the sweet spot, in my
-opinion.  Final thoughts and when doing TDD doesn’t help.
+opinion.
+
+### Final thoughts and when doing TDD doesn’t help
 
 I believe that Test-Driven Development doesn’t help when we are not quite
 certain about what to do and what to expect. Sometimes, you might not be
