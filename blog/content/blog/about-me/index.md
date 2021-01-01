@@ -1,7 +1,8 @@
 ---
-title: Who am I?
+title: About me
 date: "2021-01-01T12:00:00.000Z"
-description: "Who am I?"
+description: "Introduction about who I am, my background and the values I try to
+stand by."
 ---
 
 ## Background
