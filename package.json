@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "git@github.com:alabeduarte/alabeduarte.github.io.git",
   "author": "Alabe Duarte <alabeduarte@gmail.com>",
-  "license": "MIT",
+  "license": "CC-BY-NC-SA-4.0",
   "dependencies": {
     "gatsby": "^2.29.3"
   }

@@ -25,9 +25,26 @@ const Layout = ({ location, title, children }) => {
       <header className="global-header">{header}</header>
       <main>{children}</main>
       <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
+        <a
+          rel="license"
+          href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+        >
+          <img
+            alt="Creative Commons License"
+            style={{ borderWidth: 0 }}
+            src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
+          />
+        </a>
+        <br />
+        This work is licensed under a{" "}
+        <a
+          rel="license"
+          href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+        >
+          Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+          International License
+        </a>
+        .
       </footer>
     </div>
   )
