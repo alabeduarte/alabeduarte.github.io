@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Alabe's Blog`,
+    title: `Alabê's Blog`,
     author: {
-      name: `Alabe Duarte`,
+      name: `Alabê Duarte`,
       summary: `Software Engineer`,
     },
     description: `This is where I'll share my thoughts`,
@@ -62,7 +62,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `All posts`,
-        short_name: `Alabe`,
+        short_name: `Alabê`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
