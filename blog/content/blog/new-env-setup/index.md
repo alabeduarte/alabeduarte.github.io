@@ -2,40 +2,40 @@
 title: Setting up a new machine
 date: "2021-01-08T03:58:16.530Z"
 description: "As I became to customise my settings more and more, having to
-setup a new environment wasn't an exciting thing to do anymore.  I not only have
-to remember to install all of these things that I need, it became also tedius
-and demanded a large cognitive effort.  Also I got frustated many times because
-I thought I was all setup until I realised I forgot to install a particular
-tool. This post shares some things I've leanerd when comes to automating my
+set up a new environment wasn't an exciting thing to do anymore.  I not only have
+to remember to install all of these things that I need, but it became also tedious
+and demanded a large cognitive effort.  Also, I got frustrated many times because
+I thought I was all set up until I realised I forgot to install a particular
+tool. This post shares some things I've learned when comes to automating my
 environment setup."
 ---
 
-## Dang! Got a new laptop and I have to setup everything... again...
+## Dang! Got a new laptop and I have to set up everything... again...
 
-I always find exciting when I get something new, such as a new laptop. When
+I always find it exciting when I get something new, such as a new laptop. When
 buying one, changing jobs (assuming the employer provides me one) or replacing
-old by a new.
+old by new.
 
 The first thing I like to do is to assess the machine's power, see what is made
-of in terms of memory and disk space. Then, I see how far I can get in terms of
+in terms of memory and disk space. Then, I see how far I can get in terms of
 privileges (i.e. can I install/uninstall whatever I want?).
 
 This is important to me because I like to keep things clean and tidy so
-eventually I can start making my own mess by installing my stuff. During my
-career I kind of got a mental list of softwares I lean on, things that I really
+eventually, I can start making my own mess by installing my stuff. During my
+The career I kind of got a mental list of software I lean on, things that I really
 need, other things that I _might_ need and others that I heard that are nice but
 I never really used it.
 
 As I became to customise my settings more and more, *having a new machine wasn't
 that exciting anymore*. I not only have to remember to install all of these
-things that I need, it became also tedius and demanded a large cognitive effort.
-Also I got frustated many times because I thought I was all setup until I
+things that I need, but it became also tedious and demanded a large cognitive effort.
+Also, I got frustrated many times because I thought I was all set up until I
 realised I forgot to install a particular tool.
 
 ## Consistent environment
 
 The way I now approach this is to automate my setup as much as I can so that
-every time I setup a new machine, my development environment will be consistent
+every time I set up a new machine, my development environment will be consistent
 each time. In order to make this happen, I like to structure my environment
 setup with the following categories:
 
@@ -48,9 +48,9 @@ setup with the following categories:
 ### Tools
 
 I like to go with an approach of running a single command and install everything
-I need at once. The operational system that I've been using is macOS but most of
+I need at once. The operating system that I've been using is macOS but most of
 the things that I'll mention here also applies for Linux. In terms of Windows,
-probably you will find equivalent.  What is important here is to stick to the
+probably you will find an equivalent.  What is important here is to stick to the
 concept of automation.
 
 What I use to install the tools that I rely on is [Homebrew](https://brew.sh/)
@@ -60,7 +60,7 @@ and it is simple as that:
 $ brew install git
 ```
 
-_The command above installs `git`, as an exampe._
+_The command above installs `git`, as an example._
 
 You also can use `brew` to install macOS apps (i.e. browser, code editor, image
 visualisation, etc) via [Homebrew Cask](https://formulae.brew.sh/cask/)
@@ -78,7 +78,7 @@ $ brew upgrade git
 ```
 
 The good thing about this is that you can now dump all your software list you
-ever installed via brew into one file and that can be used to setup a whole new
+ever installed via brew into one file and that can be used to set up a whole new
 machine with a single command. You can achieve that with [Homebrew
 Bundle](https://github.com/Homebrew/homebrew-bundle).
 
@@ -146,16 +146,16 @@ A few options to consider:
 
 ### Configuration
 
-This category is pretty much to make sure once you are all setup, your tools are
+This category is pretty much to make sure once you are all set up, your tools are
 the way you left them before changing machines (or before you restored your
 current machine). I personally don't bother too much about browser config
-because I have personal accounts that brings my config from the browser's cloud,
+because I have personal accounts that bring my config from the browser's cloud,
 but editor configuration is something that is really close to my workflow and if
 I don't see my editor or my terminal the way I remembered, I might have a
-hardtime trying to remember where things were before becoming productive.
+Hard time trying to remember where things were before becoming productive.
 
 About code editors, you might have seen around some GitHub repo called
-`dotfiles`. The reason for this name is because most of configs are files that
+`dotfiles`. The reason for this name is because most of the configs are files that
 have `.` in front of its name (i.e. `.gitconfig`, `.vim`, `.zshrc`, `.idea`,
 etc).
 
@@ -167,9 +167,9 @@ and have your original config in place.
 In addition, you can also add customisable scripts to speed up your initial
 setting. As an example, VSCode is an editor that you can install a number of
 plugins to support your day-to-day development. So, although I'm not a heavy
-VSCode user, I use it sometimes and I have a few plugins that helps during these
+VSCode user, I use it sometimes and I have a few plugins that help during these
 occasions. So I came up with a script that will read all my current plugins and
-store them into a file so whenever I setup a new environment, the script will
+store them into a file so whenever I set up a new environment, the script will
 install all of these plugins so that when I open VSCode, the `settings.json`
 will contain all plugins that I used to have in my previous environment. That's
 was pretty much inspired by [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle)
