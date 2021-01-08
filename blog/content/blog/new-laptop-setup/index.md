@@ -1,7 +1,13 @@
 ---
 title: Setting up a new machine
 date: "2021-01-08T03:58:16.530Z"
-description: "Sharing a few tips when setting up a new machine."
+description: "As I became to customise my settings more and more, having to
+setup a new environment wasn't an exciting thing to do anymore.  I not only have
+to remember to install all of these things that I need, it became also tedius
+and demanded a large cognitive effort.  Also I got frustated many times because
+I thought I was all setup until I realised I forgot to install a particular
+tool. This post shares some things I've leanerd when comes to automating my
+environment setup."
 ---
 
 ## Dang! Got a new laptop and I have to setup everything... again...
