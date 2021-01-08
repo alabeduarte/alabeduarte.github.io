@@ -27,6 +27,7 @@ const Bio = () => {
           }
           social {
             twitter
+            github
           }
         }
       }
@@ -63,12 +64,12 @@ const Bio = () => {
           <p>
             <ul>
               <li>
-                <a href={`https://twitter.com/${social.twitter || ``}`}>
+                <a href={`https://twitter.com/${social.twitter}`}>
                   @alabeduarte on Twitter
                 </a>
               </li>
               <li>
-                <a href={`https://github.com/${social.github || ``}`}>
+                <a href={`https://github.com/${social.github}`}>
                   @alabeduarte on GitHub
                 </a>
               </li>
