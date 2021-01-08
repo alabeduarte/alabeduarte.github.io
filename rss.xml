@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 08 Jan 2021 05:35:06 GMT</lastBuildDate><item><title><![CDATA[Setting up a new machine]]></title><description><![CDATA[Dang! Got a new laptop and I have to set up everything… again… I always find it exciting when I get something new, such as a new laptop…]]></description><link>https://alabeduarte.com/new-env-setup/</link><guid isPermaLink="false">https://alabeduarte.com/new-env-setup/</guid><pubDate>Fri, 08 Jan 2021 03:58:16 GMT</pubDate><content:encoded>&lt;h2&gt;Dang! Got a new laptop and I have to set up everything… again…&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 08 Jan 2021 06:37:54 GMT</lastBuildDate><item><title><![CDATA[Setting up a new machine]]></title><description><![CDATA[Dang! Got a new laptop and I have to set up everything… again… I always find it exciting when I get something new, such as a new laptop…]]></description><link>https://alabeduarte.com/new-env-setup/</link><guid isPermaLink="false">https://alabeduarte.com/new-env-setup/</guid><pubDate>Fri, 08 Jan 2021 03:58:16 GMT</pubDate><content:encoded>&lt;h2&gt;Dang! Got a new laptop and I have to set up everything… again…&lt;/h2&gt;
 &lt;p&gt;I always find it exciting when I get something new, such as a new laptop. When
 buying one, changing jobs (assuming the employer provides me one) or replacing
 old by new.&lt;/p&gt;
 &lt;p&gt;The first thing I like to do is to assess the machine’s power, see what is made
 in terms of memory and disk space. Then, I see how far I can get in terms of
 privileges (i.e. can I install/uninstall whatever I want?).&lt;/p&gt;
-&lt;p&gt;This is important to me because I like to keep things clean and tidy so
+&lt;p&gt;This is important to me because I like to keep things clean and tidy so,
 eventually, I can start making my own mess by installing my stuff. During my
-The career I kind of got a mental list of software I lean on, things that I really
+career I kind of got a mental list of software I lean on, things that I really
 need, other things that I &lt;em&gt;might&lt;/em&gt; need and others that I heard that are nice but
 I never really used it.&lt;/p&gt;
 &lt;p&gt;As I became to customise my settings more and more, &lt;em&gt;having a new machine wasn’t
 that exciting anymore&lt;/em&gt;. I not only have to remember to install all of these
-things that I need, but it became also tedious and demanded a large cognitive effort.
-Also, I got frustrated many times because I thought I was all set up until I
-realised I forgot to install a particular tool.&lt;/p&gt;
+things that I need, but it became also tedious and demanded a large cognitive
+effort.  Also, I got frustrated many times because I thought I was all set up
+until I realised I forgot to install a particular tool.&lt;/p&gt;
 &lt;h2&gt;Consistent environment&lt;/h2&gt;
 &lt;p&gt;The way I now approach this is to automate my setup as much as I can so that
 every time I set up a new machine, my development environment will be consistent
@@ -92,17 +92,17 @@ here’s
 &lt;li&gt;&lt;a href=&quot;https://buttercup.pw&quot;&gt;Buttercup&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Configuration&lt;/h3&gt;
-&lt;p&gt;This category is pretty much to make sure once you are all set up, your tools are
-the way you left them before changing machines (or before you restored your
+&lt;p&gt;This category is pretty much to make sure once you are all set up, your tools
+are the way you left them before changing machines (or before you restored your
 current machine). I personally don’t bother too much about browser config
 because I have personal accounts that bring my config from the browser’s cloud,
 but editor configuration is something that is really close to my workflow and if
-I don’t see my editor or my terminal the way I remembered, I might have a
-Hard time trying to remember where things were before becoming productive.&lt;/p&gt;
+I don’t see my editor or my terminal the way I remembered, I might have a Hard
+time trying to remember where things were before becoming productive.&lt;/p&gt;
 &lt;p&gt;About code editors, you might have seen around some GitHub repo called
-&lt;code class=&quot;language-text&quot;&gt;dotfiles&lt;/code&gt;. The reason for this name is because most of the configs are files that
-have &lt;code class=&quot;language-text&quot;&gt;.&lt;/code&gt; in front of its name (i.e. &lt;code class=&quot;language-text&quot;&gt;.gitconfig&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.vim&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.idea&lt;/code&gt;,
-etc).&lt;/p&gt;
+&lt;code class=&quot;language-text&quot;&gt;dotfiles&lt;/code&gt;. The reason for this name is because most of the configs are files
+that have &lt;code class=&quot;language-text&quot;&gt;.&lt;/code&gt; in front of its name (i.e. &lt;code class=&quot;language-text&quot;&gt;.gitconfig&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.vim&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;,
+&lt;code class=&quot;language-text&quot;&gt;.idea&lt;/code&gt;, etc).&lt;/p&gt;
 &lt;p&gt;So what most people do, they create a git repository somewhere (i.e. GitHub,
 GitLab, Bitbucket, etc) and consolidate all configs into one place so whenever
 you clone your repo (from a brand-new machine), you can run a couple of commands
@@ -115,7 +115,8 @@ occasions. So I came up with a script that will read all my current plugins and
 store them into a file so whenever I set up a new environment, the script will
 install all of these plugins so that when I open VSCode, the &lt;code class=&quot;language-text&quot;&gt;settings.json&lt;/code&gt;
 will contain all plugins that I used to have in my previous environment. That’s
-was pretty much inspired by &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;Homebrew Bundle&lt;/a&gt;&lt;/p&gt;
+was pretty much inspired by &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;Homebrew
+Bundle&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here’s a snippet:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;#!/bin/bash
 
