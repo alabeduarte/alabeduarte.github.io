@@ -64,12 +64,12 @@ const Bio = () => {
             <ul>
               <li>
                 <a href={`https://twitter.com/${social.twitter || ``}`}>
-                  @alabeduarte at Twitter
+                  @alabeduarte on Twitter
                 </a>
               </li>
               <li>
                 <a href={`https://github.com/${social.github || ``}`}>
-                  @alabeduarte at GitHub
+                  @alabeduarte on GitHub
                 </a>
               </li>
             </ul>
