@@ -20,17 +20,17 @@ The first thing I like to do is to assess the machine's power, see what is made
 in terms of memory and disk space. Then, I see how far I can get in terms of
 privileges (i.e. can I install/uninstall whatever I want?).
 
-This is important to me because I like to keep things clean and tidy so
+This is important to me because I like to keep things clean and tidy so,
 eventually, I can start making my own mess by installing my stuff. During my
-The career I kind of got a mental list of software I lean on, things that I really
+career I kind of got a mental list of software I lean on, things that I really
 need, other things that I _might_ need and others that I heard that are nice but
 I never really used it.
 
 As I became to customise my settings more and more, *having a new machine wasn't
 that exciting anymore*. I not only have to remember to install all of these
-things that I need, but it became also tedious and demanded a large cognitive effort.
-Also, I got frustrated many times because I thought I was all set up until I
-realised I forgot to install a particular tool.
+things that I need, but it became also tedious and demanded a large cognitive
+effort.  Also, I got frustrated many times because I thought I was all set up
+until I realised I forgot to install a particular tool.
 
 ## Consistent environment
 
@@ -146,18 +146,18 @@ A few options to consider:
 
 ### Configuration
 
-This category is pretty much to make sure once you are all set up, your tools are
-the way you left them before changing machines (or before you restored your
+This category is pretty much to make sure once you are all set up, your tools
+are the way you left them before changing machines (or before you restored your
 current machine). I personally don't bother too much about browser config
 because I have personal accounts that bring my config from the browser's cloud,
 but editor configuration is something that is really close to my workflow and if
-I don't see my editor or my terminal the way I remembered, I might have a
-Hard time trying to remember where things were before becoming productive.
+I don't see my editor or my terminal the way I remembered, I might have a Hard
+time trying to remember where things were before becoming productive.
 
 About code editors, you might have seen around some GitHub repo called
-`dotfiles`. The reason for this name is because most of the configs are files that
-have `.` in front of its name (i.e. `.gitconfig`, `.vim`, `.zshrc`, `.idea`,
-etc).
+`dotfiles`. The reason for this name is because most of the configs are files
+that have `.` in front of its name (i.e. `.gitconfig`, `.vim`, `.zshrc`,
+`.idea`, etc).
 
 So what most people do, they create a git repository somewhere (i.e. GitHub,
 GitLab, Bitbucket, etc) and consolidate all configs into one place so whenever
@@ -172,7 +172,8 @@ occasions. So I came up with a script that will read all my current plugins and
 store them into a file so whenever I set up a new environment, the script will
 install all of these plugins so that when I open VSCode, the `settings.json`
 will contain all plugins that I used to have in my previous environment. That's
-was pretty much inspired by [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle)
+was pretty much inspired by [Homebrew
+Bundle](https://github.com/Homebrew/homebrew-bundle)
 
 Here's a snippet:
 
