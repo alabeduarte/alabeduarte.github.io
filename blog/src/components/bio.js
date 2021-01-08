@@ -50,13 +50,29 @@ const Bio = () => {
         />
         <div className="bio-social">
           <span>
-            Written by <strong>{author.name}</strong>, {author.summary}.
+            Written by <strong>{author.name}</strong>, {author.summary} at{" "}
+            <a
+              href="https://safetyculture.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              SafetyCulture
+            </a>
+            .
           </span>
           <p>
-            <a href={`https://twitter.com/${social.twitter || ``}`}>Twitter</a>
-          </p>
-          <p>
-            <a href={`https://github.com/${social.github || ``}`}>GitHub</a>
+            <ul>
+              <li>
+                <a href={`https://twitter.com/${social.twitter || ``}`}>
+                  @alabeduarte at Twitter
+                </a>
+              </li>
+              <li>
+                <a href={`https://github.com/${social.github || ``}`}>
+                  @alabeduarte at GitHub
+                </a>
+              </li>
+            </ul>
           </p>
         </div>
       </div>
