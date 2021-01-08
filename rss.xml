@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 08 Jan 2021 04:04:06 GMT</lastBuildDate><item><title><![CDATA[Setting up a new machine]]></title><description><![CDATA[Dang! Got a new laptop and I have to setup everything… again… I always find exciting when I get something new, such as a new laptop. When…]]></description><link>https://alabeduarte.com/new-env-setup/</link><guid isPermaLink="false">https://alabeduarte.com/new-env-setup/</guid><pubDate>Fri, 08 Jan 2021 03:58:16 GMT</pubDate><content:encoded>&lt;h2&gt;Dang! Got a new laptop and I have to setup everything… again…&lt;/h2&gt;
-&lt;p&gt;I always find exciting when I get something new, such as a new laptop. When
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 08 Jan 2021 04:11:15 GMT</lastBuildDate><item><title><![CDATA[Setting up a new machine]]></title><description><![CDATA[Dang! Got a new laptop and I have to set up everything… again… I always find it exciting when I get something new, such as a new laptop…]]></description><link>https://alabeduarte.com/new-env-setup/</link><guid isPermaLink="false">https://alabeduarte.com/new-env-setup/</guid><pubDate>Fri, 08 Jan 2021 03:58:16 GMT</pubDate><content:encoded>&lt;h2&gt;Dang! Got a new laptop and I have to set up everything… again…&lt;/h2&gt;
+&lt;p&gt;I always find it exciting when I get something new, such as a new laptop. When
 buying one, changing jobs (assuming the employer provides me one) or replacing
-old by a new.&lt;/p&gt;
+old by new.&lt;/p&gt;
 &lt;p&gt;The first thing I like to do is to assess the machine’s power, see what is made
-of in terms of memory and disk space. Then, I see how far I can get in terms of
+in terms of memory and disk space. Then, I see how far I can get in terms of
 privileges (i.e. can I install/uninstall whatever I want?).&lt;/p&gt;
 &lt;p&gt;This is important to me because I like to keep things clean and tidy so
-eventually I can start making my own mess by installing my stuff. During my
-career I kind of got a mental list of softwares I lean on, things that I really
+eventually, I can start making my own mess by installing my stuff. During my
+The career I kind of got a mental list of software I lean on, things that I really
 need, other things that I &lt;em&gt;might&lt;/em&gt; need and others that I heard that are nice but
 I never really used it.&lt;/p&gt;
 &lt;p&gt;As I became to customise my settings more and more, &lt;em&gt;having a new machine wasn’t
 that exciting anymore&lt;/em&gt;. I not only have to remember to install all of these
-things that I need, it became also tedius and demanded a large cognitive effort.
-Also I got frustated many times because I thought I was all setup until I
+things that I need, but it became also tedious and demanded a large cognitive effort.
+Also, I got frustrated many times because I thought I was all set up until I
 realised I forgot to install a particular tool.&lt;/p&gt;
 &lt;h2&gt;Consistent environment&lt;/h2&gt;
 &lt;p&gt;The way I now approach this is to automate my setup as much as I can so that
-every time I setup a new machine, my development environment will be consistent
+every time I set up a new machine, my development environment will be consistent
 each time. In order to make this happen, I like to structure my environment
 setup with the following categories:&lt;/p&gt;
 &lt;ul&gt;
@@ -28,14 +28,14 @@ setup with the following categories:&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3&gt;Tools&lt;/h3&gt;
 &lt;p&gt;I like to go with an approach of running a single command and install everything
-I need at once. The operational system that I’ve been using is macOS but most of
+I need at once. The operating system that I’ve been using is macOS but most of
 the things that I’ll mention here also applies for Linux. In terms of Windows,
-probably you will find equivalent.  What is important here is to stick to the
+probably you will find an equivalent.  What is important here is to stick to the
 concept of automation.&lt;/p&gt;
 &lt;p&gt;What I use to install the tools that I rely on is &lt;a href=&quot;https://brew.sh/&quot;&gt;Homebrew&lt;/a&gt;
 and it is simple as that:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew install git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;The command above installs &lt;code class=&quot;language-text&quot;&gt;git&lt;/code&gt;, as an exampe.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The command above installs &lt;code class=&quot;language-text&quot;&gt;git&lt;/code&gt;, as an example.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;You also can use &lt;code class=&quot;language-text&quot;&gt;brew&lt;/code&gt; to install macOS apps (i.e. browser, code editor, image
 visualisation, etc) via &lt;a href=&quot;https://formulae.brew.sh/cask/&quot;&gt;Homebrew Cask&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew install --cask firefox&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -44,7 +44,7 @@ managed by it. Meaning that whenever you need to upgrade, reinstall or delete,
 you can do via homebrew as follows:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew upgrade git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The good thing about this is that you can now dump all your software list you
-ever installed via brew into one file and that can be used to setup a whole new
+ever installed via brew into one file and that can be used to set up a whole new
 machine with a single command. You can achieve that with &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;Homebrew
 Bundle&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Please follow the &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;official
@@ -92,15 +92,15 @@ here’s
 &lt;li&gt;&lt;a href=&quot;https://buttercup.pw&quot;&gt;Buttercup&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Configuration&lt;/h3&gt;
-&lt;p&gt;This category is pretty much to make sure once you are all setup, your tools are
+&lt;p&gt;This category is pretty much to make sure once you are all set up, your tools are
 the way you left them before changing machines (or before you restored your
 current machine). I personally don’t bother too much about browser config
-because I have personal accounts that brings my config from the browser’s cloud,
+because I have personal accounts that bring my config from the browser’s cloud,
 but editor configuration is something that is really close to my workflow and if
 I don’t see my editor or my terminal the way I remembered, I might have a
-hardtime trying to remember where things were before becoming productive.&lt;/p&gt;
+Hard time trying to remember where things were before becoming productive.&lt;/p&gt;
 &lt;p&gt;About code editors, you might have seen around some GitHub repo called
-&lt;code class=&quot;language-text&quot;&gt;dotfiles&lt;/code&gt;. The reason for this name is because most of configs are files that
+&lt;code class=&quot;language-text&quot;&gt;dotfiles&lt;/code&gt;. The reason for this name is because most of the configs are files that
 have &lt;code class=&quot;language-text&quot;&gt;.&lt;/code&gt; in front of its name (i.e. &lt;code class=&quot;language-text&quot;&gt;.gitconfig&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.vim&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.idea&lt;/code&gt;,
 etc).&lt;/p&gt;
 &lt;p&gt;So what most people do, they create a git repository somewhere (i.e. GitHub,
@@ -110,9 +110,9 @@ and have your original config in place.&lt;/p&gt;
 &lt;p&gt;In addition, you can also add customisable scripts to speed up your initial
 setting. As an example, VSCode is an editor that you can install a number of
 plugins to support your day-to-day development. So, although I’m not a heavy
-VSCode user, I use it sometimes and I have a few plugins that helps during these
+VSCode user, I use it sometimes and I have a few plugins that help during these
 occasions. So I came up with a script that will read all my current plugins and
-store them into a file so whenever I setup a new environment, the script will
+store them into a file so whenever I set up a new environment, the script will
 install all of these plugins so that when I open VSCode, the &lt;code class=&quot;language-text&quot;&gt;settings.json&lt;/code&gt;
 will contain all plugins that I used to have in my previous environment. That’s
 was pretty much inspired by &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;Homebrew Bundle&lt;/a&gt;&lt;/p&gt;
