@@ -1,4 +1,175 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 03 Jan 2021 23:00:49 GMT</lastBuildDate><item><title><![CDATA[TDD (Test-Driven Development) - My personal journey]]></title><description><![CDATA[What is TDD? TDD stands for Test-Driven Development and it is a Software
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 08 Jan 2021 04:03:18 GMT</lastBuildDate><item><title><![CDATA[Setting up a new machine]]></title><description><![CDATA[Dang! Got a new laptop and I have to setup everything… again… I always find exciting when I get something new, such as a new laptop. When…]]></description><link>https://alabeduarte.com/new-laptop-setup/</link><guid isPermaLink="false">https://alabeduarte.com/new-laptop-setup/</guid><pubDate>Fri, 08 Jan 2021 03:58:16 GMT</pubDate><content:encoded>&lt;h2&gt;Dang! Got a new laptop and I have to setup everything… again…&lt;/h2&gt;
+&lt;p&gt;I always find exciting when I get something new, such as a new laptop. When
+buying one, changing jobs (assuming the employer provides me one) or replacing
+old by a new.&lt;/p&gt;
+&lt;p&gt;The first thing I like to do is to assess the machine’s power, see what is made
+of in terms of memory and disk space. Then, I see how far I can get in terms of
+privileges (i.e. can I install/uninstall whatever I want?).&lt;/p&gt;
+&lt;p&gt;This is important to me because I like to keep things clean and tidy so
+eventually I can start making my own mess by installing my stuff. During my
+career I kind of got a mental list of softwares I lean on, things that I really
+need, other things that I &lt;em&gt;might&lt;/em&gt; need and others that I heard that are nice but
+I never really used it.&lt;/p&gt;
+&lt;p&gt;As I became to customise my settings more and more, &lt;em&gt;having a new machine wasn’t
+that exciting anymore&lt;/em&gt;. I not only have to remember to install all of these
+things that I need, it became also tedius and demanded a large cognitive effort.
+Also I got frustated many times because I thought I was all setup until I
+realised I forgot to install a particular tool.&lt;/p&gt;
+&lt;h2&gt;Consistent environment&lt;/h2&gt;
+&lt;p&gt;The way I now approach this is to automate my setup as much as I can so that
+every time I setup a new machine, my development environment will be consistent
+each time. In order to make this happen, I like to structure my environment
+setup with the following categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tools&lt;/li&gt;
+&lt;li&gt;Access&lt;/li&gt;
+&lt;li&gt;Configuration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;Tools&lt;/h3&gt;
+&lt;p&gt;I like to go with an approach of running a single command and install everything
+I need at once. The operational system that I’ve been using is macOS but most of
+the things that I’ll mention here also applies for Linux. In terms of Windows,
+probably you will find equivalent.  What is important here is to stick to the
+concept of automation.&lt;/p&gt;
+&lt;p&gt;What I use to install the tools that I rely on is &lt;a href=&quot;https://brew.sh/&quot;&gt;Homebrew&lt;/a&gt;
+and it is simple as that:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew install git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;The command above installs &lt;code class=&quot;language-text&quot;&gt;git&lt;/code&gt;, as an exampe.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;You also can use &lt;code class=&quot;language-text&quot;&gt;brew&lt;/code&gt; to install macOS apps (i.e. browser, code editor, image
+visualisation, etc) via &lt;a href=&quot;https://formulae.brew.sh/cask/&quot;&gt;Homebrew Cask&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew install --cask firefox&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When you install something via &lt;code class=&quot;language-text&quot;&gt;brew&lt;/code&gt; (a.k.a Homebrew), the software is now
+managed by it. Meaning that whenever you need to upgrade, reinstall or delete,
+you can do via homebrew as follows:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew upgrade git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The good thing about this is that you can now dump all your software list you
+ever installed via brew into one file and that can be used to setup a whole new
+machine with a single command. You can achieve that with &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;Homebrew
+Bundle&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Please follow the &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;official
+documentation&lt;/a&gt; to install it
+properly.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Once you are all set, you can run the following command that will consolidate
+all the things you have installed into a file usually named &lt;code class=&quot;language-text&quot;&gt;Brewfile&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew bundle dump --file=Brewfile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, the &lt;code class=&quot;language-text&quot;&gt;Brewfile&lt;/code&gt; will look like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;tap &amp;quot;github/gh&amp;quot;
+tap &amp;quot;homebrew/bundle&amp;quot;
+tap &amp;quot;homebrew/cask&amp;quot;
+tap &amp;quot;homebrew/cask-fonts&amp;quot;
+tap &amp;quot;homebrew/cask-versions&amp;quot;
+tap &amp;quot;homebrew/core&amp;quot;
+tap &amp;quot;homebrew/services&amp;quot;
+brew &amp;quot;git&amp;quot;
+brew &amp;quot;go&amp;quot;
+brew &amp;quot;make&amp;quot;
+brew &amp;quot;neovim&amp;quot;
+brew &amp;quot;tmux&amp;quot;
+brew &amp;quot;unzip&amp;quot;
+cask &amp;quot;buttercup&amp;quot;
+cask &amp;quot;docker&amp;quot;
+cask &amp;quot;firefox&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, imagine you do that now, save this file somewhere (i.e. cloud). When you
+receive a new machine or even format your current machine, you can run &lt;code class=&quot;language-text&quot;&gt;brew
+bundle&lt;/code&gt; to restore all the software that you used to have. See the command
+below:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ brew bundle --file=homebrew/Brewfile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The above will install everything as if you were running &lt;code class=&quot;language-text&quot;&gt;brew install git&lt;/code&gt;,
+&lt;code class=&quot;language-text&quot;&gt;brew install go&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;h3&gt;Access&lt;/h3&gt;
+&lt;p&gt;Now you have your stuff in place, there will be a “necessary” pain of
+authenticating with most of them (i.e. your cloud storage, your music app). The
+way I like to approach this is to get handy a password manager.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;PS: I usually use brew cask to install mine so I don’t have to install it
+manually ever again&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In case you don’t have a password manager, I’d consider downloading one now,
+here’s
+&lt;a href=&quot;https://www.troyhunt.com/password-managers-dont-have-to-be-perfect-they-just-have-to-be-better-than-not-having-one/&quot;&gt;why&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A few options to consider:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://1password.com/&quot;&gt;1Password&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://buttercup.pw&quot;&gt;Buttercup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Configuration&lt;/h3&gt;
+&lt;p&gt;This category is pretty much to make sure once you are all setup, your tools are
+the way you left them before changing machines (or before you restored your
+current machine). I personally don’t bother too much about browser config
+because I have personal accounts that brings my config from the browser’s cloud,
+but editor configuration is something that is really close to my workflow and if
+I don’t see my editor or my terminal the way I remembered, I might have a
+hardtime trying to remember where things were before becoming productive.&lt;/p&gt;
+&lt;p&gt;About code editors, you might have seen around some GitHub repo called
+&lt;code class=&quot;language-text&quot;&gt;dotfiles&lt;/code&gt;. The reason for this name is because most of configs are files that
+have &lt;code class=&quot;language-text&quot;&gt;.&lt;/code&gt; in front of its name (i.e. &lt;code class=&quot;language-text&quot;&gt;.gitconfig&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.vim&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;.idea&lt;/code&gt;,
+etc).&lt;/p&gt;
+&lt;p&gt;So what most people do, they create a git repository somewhere (i.e. GitHub,
+GitLab, Bitbucket, etc) and consolidate all configs into one place so whenever
+you clone your repo (from a brand-new machine), you can run a couple of commands
+and have your original config in place.&lt;/p&gt;
+&lt;p&gt;In addition, you can also add customisable scripts to speed up your initial
+setting. As an example, VSCode is an editor that you can install a number of
+plugins to support your day-to-day development. So, although I’m not a heavy
+VSCode user, I use it sometimes and I have a few plugins that helps during these
+occasions. So I came up with a script that will read all my current plugins and
+store them into a file so whenever I setup a new environment, the script will
+install all of these plugins so that when I open VSCode, the &lt;code class=&quot;language-text&quot;&gt;settings.json&lt;/code&gt;
+will contain all plugins that I used to have in my previous environment. That’s
+was pretty much inspired by &lt;a href=&quot;https://github.com/Homebrew/homebrew-bundle&quot;&gt;Homebrew Bundle&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here’s a snippet:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;#!/bin/bash
+
+###
+# Creates symbolic link from this dir into where vscode is installed
+# then reads VSCodeExtensionsFile and install each extension one by one
+###
+bundle()
+{
+  # Creates symbolic link
+  rm -rf ~/Library/Application\ Support/Code/User/settings.json || true
+  ln -s `pwd`/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+
+  # Install extensions
+  while read extension; do
+    code --install-extension $extension
+  done &amp;lt; vscode/VSCodeExtensionsFile
+
+  echo &amp;quot;Done.&amp;quot;
+}
+
+###
+# List vscode extensions and place into VSCodeExtensionsFile file
+###
+dump()
+{
+  extensions=&amp;quot;vscode/VSCodeExtensionsFile&amp;quot;
+  echo &amp;quot;Reading existing extensions from VSCode onto $extensions&amp;quot;
+  echo &amp;quot;&amp;quot;
+
+  code --list-extensions | tee $extensions
+
+  echo &amp;quot;Done.&amp;quot;
+}
+
+$*&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;If you read until now, thank you very much, I hope this article help you somehow
+or help someone you know!&lt;/p&gt;
+&lt;p&gt;I’ll share below my personal &lt;code class=&quot;language-text&quot;&gt;dotfiles&lt;/code&gt; where I apply most of the things I’ve
+discussed and feel free to copy &amp;#x26; paste and make your own config according to
+what makes sense to you.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/alabeduarte/dotfiles&quot;&gt;https://github.com/alabeduarte/dotfiles&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you have any questions or feedback, feel free to email me on
+&lt;a href=&quot;mailto:alabeduarte@gmail.com&quot;&gt;alabeduarte@gmail.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A few shout outs to friends that helped me and inspired me to do this post:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/celsodantas&quot;&gt;Celso Dantas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/fernando-alves&quot;&gt;Fernando Alves&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://about.me/gtramontina&quot;&gt;Guilherme Tramontina&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://marcovaltas.com/about.html&quot;&gt;Marco Valtas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/narcisobenigno&quot;&gt;Narciso Benigno&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[TDD (Test-Driven Development) - My personal journey]]></title><description><![CDATA[What is TDD? TDD stands for Test-Driven Development and it is a Software
 Development’s process that was credited to Kent
 Beck.  The idea…]]></description><link>https://alabeduarte.com/tdd/</link><guid isPermaLink="false">https://alabeduarte.com/tdd/</guid><pubDate>Fri, 01 Jan 2021 14:00:00 GMT</pubDate><content:encoded>&lt;p&gt;What is TDD? TDD stands for Test-Driven Development and it is a Software
 Development’s process that was credited to &lt;a href=&quot;https://www.kentbeck.com/&quot;&gt;Kent
