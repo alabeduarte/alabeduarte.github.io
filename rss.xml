@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 20 Jan 2021 02:43:57 GMT</lastBuildDate><item><title><![CDATA[Setting up a new machine]]></title><description><![CDATA[Dang! Got a new laptop and I have to set up everything… again… I always find it exciting when I get something new, such as a new laptop…]]></description><link>https://alabeduarte.com/new-env-setup/</link><guid isPermaLink="false">https://alabeduarte.com/new-env-setup/</guid><pubDate>Fri, 08 Jan 2021 03:58:16 GMT</pubDate><content:encoded>&lt;h2&gt;Dang! Got a new laptop and I have to set up everything… again…&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 20 Jan 2021 03:15:20 GMT</lastBuildDate><item><title><![CDATA[Setting up a new machine]]></title><description><![CDATA[Dang! Got a new laptop and I have to set up everything… again… I always find it exciting when I get something new, such as a new laptop…]]></description><link>https://alabeduarte.com/new-env-setup/</link><guid isPermaLink="false">https://alabeduarte.com/new-env-setup/</guid><pubDate>Fri, 08 Jan 2021 03:58:16 GMT</pubDate><content:encoded>&lt;h2&gt;Dang! Got a new laptop and I have to set up everything… again…&lt;/h2&gt;
 &lt;p&gt;I always find it exciting when I get something new, such as a new laptop. When
 buying one, changing jobs (assuming the employer provides me one) or replacing
 old by new.&lt;/p&gt;
@@ -153,6 +153,29 @@ dump()
 }
 
 $*&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;— Edited on Wed 20 Jan&lt;/p&gt;
+&lt;p&gt;If you want to use the the script above, you can copy its content into your
+machine with the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a file on your &lt;code class=&quot;language-text&quot;&gt;/usr/local/bin&lt;/code&gt; so that you can execute from anywhere&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ touch /usr/local/bin/vs-code-bundler&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;Grant permission to the script to being executed&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ chmod +x /usr/local/bin/vs-code-bundler&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;Open the file we created and paste the script&lt;/li&gt;
+&lt;li&gt;Test the script&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Run the command below to get your existing extensions and dump into a file.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ vs-code-bundler dump&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then check the content of &lt;code class=&quot;language-text&quot;&gt;vscode/VSCodeExtensionsFile&lt;/code&gt; and see if it matches
+with your existing extensions:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ cat vscode/VSCodeExtensionsFile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save this file somewhere and next time you can run the &lt;code class=&quot;language-text&quot;&gt;bundle&lt;/code&gt; command to
+install everything if you need to:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ vs-code-bundler bundle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;hr&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;If you read until now, thank you very much, I hope this article help you somehow

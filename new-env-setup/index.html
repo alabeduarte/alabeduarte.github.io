@@ -156,6 +156,29 @@ dump()
 }
 
 $*</code></pre></div>
+<p>— Edited on Wed 20 Jan</p>
+<p>If you want to use the the script above, you can copy its content into your
+machine with the following steps:</p>
+<ol>
+<li>Create a file on your <code class="language-text">/usr/local/bin</code> so that you can execute from anywhere</li>
+</ol>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">$ touch /usr/local/bin/vs-code-bundler</code></pre></div>
+<ol start="2">
+<li>Grant permission to the script to being executed</li>
+</ol>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">$ chmod +x /usr/local/bin/vs-code-bundler</code></pre></div>
+<ol start="3">
+<li>Open the file we created and paste the script</li>
+<li>Test the script</li>
+</ol>
+<p>Run the command below to get your existing extensions and dump into a file.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">$ vs-code-bundler dump</code></pre></div>
+<p>Then check the content of <code class="language-text">vscode/VSCodeExtensionsFile</code> and see if it matches
+with your existing extensions:</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">$ cat vscode/VSCodeExtensionsFile</code></pre></div>
+<p>Save this file somewhere and next time you can run the <code class="language-text">bundle</code> command to
+install everything if you need to:</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">$ vs-code-bundler bundle</code></pre></div>
 <hr>
 <h2>Conclusion</h2>
 <p>If you read until now, thank you very much, I hope this article help you somehow
