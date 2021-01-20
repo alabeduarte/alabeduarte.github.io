@@ -215,6 +215,47 @@ dump()
 $*
 ```
 
+-- Edited on Wed 20 Jan
+
+If you want to use the the script above, you can copy its content into your
+machine with the following steps:
+
+1. Create a file on your `/usr/local/bin` so that you can execute from anywhere
+
+```
+$ touch /usr/local/bin/vs-code-bundler
+```
+
+2. Grant permission to the script to being executed
+
+```
+$ chmod +x /usr/local/bin/vs-code-bundler
+```
+
+3. Open the file we created and paste the script
+
+4. Test the script
+
+Run the command below to get your existing extensions and dump into a file.
+
+```
+$ vs-code-bundler dump
+```
+
+Then check the content of `vscode/VSCodeExtensionsFile` and see if it matches
+with your existing extensions:
+
+```
+$ cat vscode/VSCodeExtensionsFile
+```
+
+Save this file somewhere and next time you can run the `bundle` command to
+install everything if you need to:
+
+```
+$ vs-code-bundler bundle
+```
+
 ---
 
 ## Conclusion
