@@ -25,26 +25,40 @@ const Layout = ({ location, title, children }) => {
       <header className="global-header">{header}</header>
       <main>{children}</main>
       <footer>
-        <a
-          rel="license"
-          href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-        >
-          <img
-            alt="Creative Commons License"
-            style={{ borderWidth: 0 }}
-            src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
-          />
-        </a>
-        <br />
-        This work is licensed under a{" "}
-        <a
-          rel="license"
-          href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-        >
-          Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-          International License
-        </a>
-        .
+        <p>
+          <a
+            rel="noreferrer"
+            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+          >
+            <img
+              alt="Creative Commons License"
+              style={{ borderWidth: 0 }}
+              src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
+            />
+          </a>
+          <br />
+          This work is licensed under a{" "}
+          <a
+            rel="noreferrer"
+            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+          >
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+            International License
+          </a>
+          .
+        </p>
+        <p>
+          <a href="/rss.xml" rel="noreferrer" target="_blank">
+            <img
+              class="feed"
+              alt="Subscribe to the RSS feed"
+              src="rss-logo.png"
+            />
+            subscribe to the RSS feed
+          </a>
+        </p>
       </footer>
     </div>
   )

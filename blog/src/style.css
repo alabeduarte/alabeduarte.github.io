@@ -324,6 +324,11 @@ a:focus {
   margin-bottom: var(--spacing-8);
 }
 
+.feed {
+  max-width: 45px;
+  padding-right: var(--spacing-3);
+}
+
 /* Media queries */
 
 @media (max-width: 42rem) {
