@@ -1,11 +1,11 @@
 ---
-title: Multiple Git Configurations
+title: Multiple .gitconfig files
 date: "2021-01-20T07:16:30.450Z"
 description: "Quick write-up about handling multiple .gitconfig files (personal
 and work-related configs)"
 ---
 
-## What is `.gitconfig` for?
+## What `.gitconfig` is for?
 
 When you set up a new code and uses [Git](https://git-scm.com/) to manage your
 version control, unless you are only reading a code of a repository that you
