@@ -51,11 +51,6 @@ const Layout = ({ location, title, children }) => {
         </p>
         <p>
           <a href="/rss.xml" rel="noreferrer" target="_blank">
-            <img
-              class="feed"
-              alt="Subscribe to the RSS feed"
-              src="rss-logo.png"
-            />
             subscribe to the RSS feed
           </a>
         </p>
