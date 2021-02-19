@@ -1,7 +1,12 @@
 ---
 title: 3 approaches to consider when rendering conditional content in React
 date: "2021-02-19T07:54:24.368Z"
-description: ""
+description: "
+In this post, I'd like to share alternative approaches for dealing with
+conditional rendering in React. I will try to list out the pros and cons about 3
+different approaches (doesn't mean couldn't be more!) and hopefully this can be
+useful for you someday.
+"
 ---
 
 In this post, I'd like to share alternative approaches for dealing with
@@ -141,7 +146,9 @@ const Account: React.FunctionComponent<AccountCardProps> = ({
 
 #### Pros
 
-It is an easy change that gets the job done. If there is no many people
+>Easy
+
+It is an easy change that gets the job done. If there are no many people
 depending on this component and the impact of doing changes is low, I'd consider
 this approach in a heartbeat.
 
@@ -278,6 +285,8 @@ const Account: React.FunctionComponent<AccountCardProps> = ({
 
 #### Pros
 
+>Extensible
+
 This solution opens the possibilities to be able to accommodate new
 use cases that are related to different types of accounts. As we have new
 types, all we have to do is to include in the list of supported types and add a
@@ -350,7 +359,7 @@ these components can be opted-in by developers as new features are introduced or
 tweaked. This principle is also called [Open-closed
 principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle#:~:text=In%20object%2Doriented%20programming%2C%20the,without%20modifying%20its%20source%20code.).
 To illustrate this principle applied to our situation, our component is now
-**closed to modification**. Meaning that we don't add new code, or at least we
+**closed for modification**. Meaning that we don't add new code, or at least we
 minimise the changes to it. However, we will now make it **open for extension**,
 meaning that whenever new requirements come, we extend our component into
 something new based on the original one as we would do with _lego bricks_.
@@ -420,10 +429,10 @@ This approach is arguable the most flexible of all, but it can also be
 considered as over-engineering. All depends on the problem at hand.
 
 Considering our use case, if the requirement is to just display a new badge when
-the user's account is premium, breaking the component into a separate component
-might be too much. However, this approach can be really powerful because the
-original component doesn't need to be changed necessarily, therefore, the
-codebase won't be affected as we evolve our software.
+the user's account is _premium_, breaking the component into a separate
+component might be too much. However, this approach can be really powerful
+because the original component doesn't need to be changed necessarily,
+therefore, the codebase won't be affected as we evolve our software.
 
 #### Cons
 
@@ -443,10 +452,12 @@ More about that:
 
 ## Thank you for reading
 
-If you read this far, I hope I didn't waste your time. I don't believe there is
-a right or wrong approach to follow but I thought would be beneficial listing
-a few that came to mind here so it can be referenced later on as a head start in
-the case you – or future me – face similar challenges.
+If you read this far, I hope I didn't waste your time.
+
+I've talked about 3 approaches that I often consider in situations like this and
+I don't believe there is a right or wrong approach to follow but I thought would
+be beneficial listing a few that came to mind here so it can be referenced later
+on as a head start in the case you – _or future me_ – face similar challenges.
 
 I hope you enjoy this post, if you have any feedback or questions, hit me up on
 <alabeduarte@gmail.com>, I'd be happy to hear your thoughts and be better next
