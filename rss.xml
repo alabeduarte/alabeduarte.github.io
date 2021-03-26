@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 10:39:14 GMT</lastBuildDate><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 10:49:30 GMT</lastBuildDate><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in Go programs. I’ll give some examples
 of how it…]]></description><link>https://alabeduarte.com/the-semantics-of-marshalling-in-go/</link><guid isPermaLink="false">https://alabeduarte.com/the-semantics-of-marshalling-in-go/</guid><pubDate>Fri, 26 Mar 2021 10:38:35 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in &lt;a href=&quot;https://golang.org/&quot;&gt;Go&lt;/a&gt; programs. I’ll give some examples
@@ -64,10 +64,9 @@ custom representation throughout the programming language in question.&lt;/p&gt;
 Given you need to transform &lt;em&gt;type A&lt;/em&gt; to &lt;em&gt;type B&lt;/em&gt; while &lt;em&gt;type A&lt;/em&gt; is a &lt;strong&gt;binary&lt;/strong&gt;,
 I personally think that calling a “parser” doesn’t feel right.&lt;/p&gt;
 &lt;h3&gt;Back to Marshalling and Unmarshalling&lt;/h3&gt;
-&lt;p&gt;It took a bit longer but the term “Marshalling” clicked
-for me, eventually. When I first came to learn Go, call the method &lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt; to “parse”
-JSON felt really weird and low level to be given the definition discussed so
-far.&lt;/p&gt;
+&lt;p&gt;It took a bit longer but the term “Marshalling” clicked for me, eventually. When
+I first came to learn Go, call the method &lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt; to “parse” JSON felt
+really weird and too much low-level.&lt;/p&gt;
 &lt;p&gt;However, Marshal/Unmarshal can and should be used as a generic way to transform
 types between boundaries regardless of the level of abstraction (i.e. network,
 application, domain, platform).&lt;/p&gt;
