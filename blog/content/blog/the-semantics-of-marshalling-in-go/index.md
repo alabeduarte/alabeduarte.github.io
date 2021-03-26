@@ -297,9 +297,6 @@ func (a *Account) Unmarshal(src interface{}) error {
 </p>
 </details>
 
-I'd like to explore **beyond JSON parsing** since there are tons of articles
-about [parsing JSON data in go](https://gobyexample.com/json) in the internet.
-
 ### Converting from one domain to another
 
 In this particular case, let's imagine we have an e-commerce system that goes
