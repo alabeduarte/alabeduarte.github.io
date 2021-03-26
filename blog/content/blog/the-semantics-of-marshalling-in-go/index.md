@@ -90,10 +90,9 @@ I personally think that calling a "parser" doesn't feel right.
 
 ### Back to Marshalling and Unmarshalling
 
-It took a bit longer but the term "Marshalling" clicked
-for me, eventually. When I first came to learn Go, call the method `Unmarshal` to "parse"
-  JSON felt really weird and low level to be given the definition discussed so
-  far.
+It took a bit longer but the term "Marshalling" clicked for me, eventually. When
+I first came to learn Go, call the method `Unmarshal` to "parse" JSON felt
+really weird and too much low-level.
 
 However, Marshal/Unmarshal can and should be used as a generic way to transform
 types between boundaries regardless of the level of abstraction (i.e. network,
