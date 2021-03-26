@@ -126,10 +126,6 @@ into its respective format. Then, we have Account with the Unmarshal method
 which will take a single argument as input and based on the format, it will
 figure out how to Unmarshal to an Account" width="100%">
 
-<i>If the image is too small, please click <a
-href="./marshal-unmarshal-data-format.svg" target="_blank">here</a> to see it
-bigger in a different tab</i>
-
 ### Code examples
 
 <details>
@@ -320,10 +316,6 @@ circles, which one representing a Software COmponent. On each circle, we have
 boxes that represent actions, events and entities. Every component communicates
 with each other via events and the data is translated between circles throughout
 Marshalling and Unmarshalling" width="100%">
-
-<i>If the image is too small, please click <a
-href="./marshal-unmarshal-domains.svg" target="_blank">here</a> to see it
-bigger in a different tab</i>
 
 Because now the components are now communicating via a common interface
 (`Marshal`/`Unmarshal`), the data format that is used to transfer between
