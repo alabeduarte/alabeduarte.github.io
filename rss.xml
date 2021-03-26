@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 10:49:30 GMT</lastBuildDate><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 10:51:09 GMT</lastBuildDate><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in Go programs. I’ll give some examples
 of how it…]]></description><link>https://alabeduarte.com/the-semantics-of-marshalling-in-go/</link><guid isPermaLink="false">https://alabeduarte.com/the-semantics-of-marshalling-in-go/</guid><pubDate>Fri, 26 Mar 2021 10:38:35 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in &lt;a href=&quot;https://golang.org/&quot;&gt;Go&lt;/a&gt; programs. I’ll give some examples
@@ -252,8 +252,6 @@ bigger in a different tab&lt;/i&gt;&lt;/p&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 &lt;/details&gt;
-&lt;p&gt;I’d like to explore &lt;strong&gt;beyond JSON parsing&lt;/strong&gt; since there are tons of articles
-about &lt;a href=&quot;https://gobyexample.com/json&quot;&gt;parsing JSON data in go&lt;/a&gt; in the internet.&lt;/p&gt;
 &lt;h3&gt;Converting from one domain to another&lt;/h3&gt;
 &lt;p&gt;In this particular case, let’s imagine we have an e-commerce system that goes
 from adding item to a cart, placing an order and sending an invoice to the
