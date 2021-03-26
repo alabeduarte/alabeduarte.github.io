@@ -1,4 +1,321 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 19 Mar 2021 03:26:06 GMT</lastBuildDate><item><title><![CDATA[3 approaches to consider when rendering conditional content in React]]></title><description><![CDATA[In this post, I’d like to share alternative approaches for dealing with
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 10:39:14 GMT</lastBuildDate><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
+usually applied in Go programs. I’ll give some examples
+of how it…]]></description><link>https://alabeduarte.com/the-semantics-of-marshalling-in-go/</link><guid isPermaLink="false">https://alabeduarte.com/the-semantics-of-marshalling-in-go/</guid><pubDate>Fri, 26 Mar 2021 10:38:35 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to discuss how Marshalling/Unmarshalling process is
+usually applied in &lt;a href=&quot;https://golang.org/&quot;&gt;Go&lt;/a&gt; programs. I’ll give some examples
+of how it is used in practice with some code examples (i.e. data parsing) and
+then expand on other usages when we have the need for transforming data across
+different domains.&lt;/p&gt;
+&lt;p&gt;Before discussing the term
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Marshalling_(computer_science)&quot;&gt;Marshalling&lt;/a&gt;, I’d
+like to start with the word &lt;em&gt;data&lt;/em&gt; in the context of programming languages. More
+often than not we programmers have a task that involves in some shape or form
+interacting with data represented in a format and then we need to transform this
+data into a different representation.&lt;/p&gt;
+&lt;p&gt;A few use-cases that come to mind:&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fetch data from this HTTP API and convert it into my own type to then do
+something…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As soon as this “data” arrives, transform them into something else, which is
+what our system understands…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In order to integrate with certain third-party API, I need to convert this
+“data” into something that the third-party API understands to then send the
+data…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;What should we call this?&lt;/h3&gt;
+&lt;p&gt;When it comes to changing data’s representation into another representation in
+Software, I would imagine some of these terms would ring a bell:
+&lt;em&gt;Encode/Decode&lt;/em&gt;, &lt;em&gt;Marshal/Unmarshal&lt;/em&gt;, &lt;em&gt;Map&lt;/em&gt;, &lt;em&gt;Normalise (also Normalize)&lt;/em&gt;,
+&lt;em&gt;Parse&lt;/em&gt;, &lt;em&gt;Reduce&lt;/em&gt;, &lt;em&gt;Serialise (also Serialize)&lt;/em&gt;, &lt;em&gt;Transform&lt;/em&gt;, &lt;em&gt;etc.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;You might notice that different programming languages use one more than another
+and, in Go, the terms &lt;code class=&quot;language-text&quot;&gt;Marshal&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt; are usually preferred. In this
+post, I’d like to explore or try to guess why this is the case and what all of
+these terms have in common.&lt;/p&gt;
+&lt;h2&gt;The term Marshalling&lt;/h2&gt;
+&lt;p&gt;In the context of computer science and programming languages, the term
+&lt;em&gt;marshalling&lt;/em&gt; is the process of transforming a data representation into a
+suitable format that will be used by a different Software Component.&lt;/p&gt;
+&lt;p&gt;This process is quite interesting because it enables interoperability between
+different Softwares. Consider &lt;em&gt;Software X&lt;/em&gt; and &lt;em&gt;Software Y&lt;/em&gt;, they are totally
+independent of one another. However, they can communicate with each other via
+message passing and they can exchange data, as long as they establish a common
+contract or &lt;a href=&quot;https://en.wikipedia.org/wiki/Interface_(computing)&quot;&gt;interface&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;i.e.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Software X –&amp;gt; Marshal data &amp;quot;abc&amp;quot; into &amp;quot;&amp;lt;abc&amp;gt;&amp;quot;
+Software Y –&amp;gt; Unmarshal data &amp;quot;&amp;lt;abc&amp;gt;&amp;quot; into &amp;quot;A, B, C&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;How Marshal/Unmarshal can be used in Go&lt;/h2&gt;
+&lt;p&gt;In Go, one of the most famous examples you might find is converting data from a
+JSON structure into Go code (&lt;em&gt;in other words, JSON “parsing”&lt;/em&gt;).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What about the term Parsing?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There is a quite popular term that can be seen as &lt;em&gt;similar&lt;/em&gt;, but don’t assume
+that just yet, which is &lt;a href=&quot;https://en.wikipedia.org/wiki/Parsing&quot;&gt;parsing&lt;/a&gt;. I
+would say that the &lt;strong&gt;semantics of parsing&lt;/strong&gt; is more applicable when the data to
+be processed are &lt;strong&gt;&lt;em&gt;strings/symbols&lt;/em&gt;&lt;/strong&gt; that will then be transformed into a
+custom representation throughout the programming language in question.&lt;/p&gt;
+&lt;p&gt;While terms like Marshalling and Encoding offer a bit more scope to work with.
+Given you need to transform &lt;em&gt;type A&lt;/em&gt; to &lt;em&gt;type B&lt;/em&gt; while &lt;em&gt;type A&lt;/em&gt; is a &lt;strong&gt;binary&lt;/strong&gt;,
+I personally think that calling a “parser” doesn’t feel right.&lt;/p&gt;
+&lt;h3&gt;Back to Marshalling and Unmarshalling&lt;/h3&gt;
+&lt;p&gt;It took a bit longer but the term “Marshalling” clicked
+for me, eventually. When I first came to learn Go, call the method &lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt; to “parse”
+JSON felt really weird and low level to be given the definition discussed so
+far.&lt;/p&gt;
+&lt;p&gt;However, Marshal/Unmarshal can and should be used as a generic way to transform
+types between boundaries regardless of the level of abstraction (i.e. network,
+application, domain, platform).&lt;/p&gt;
+&lt;h3&gt;Converting from one format to another&lt;/h3&gt;
+&lt;p&gt;When dealing with &lt;a href=&quot;https://en.wikipedia.org/wiki/Distributed_computing&quot;&gt;Distributed
+Systems&lt;/a&gt;, converting
+different representations from one domain to another can be quite common. And
+I’m not only referring to business domains (i.e. Shopping cart, Billing,
+Invoice) but also to different transport layers (i.e. Network, Protocols).&lt;/p&gt;
+&lt;h4&gt;Data format transformations (i.e. JSON, XML, etc)&lt;/h4&gt;
+&lt;p&gt;We can unmarshal from &lt;em&gt;type A&lt;/em&gt; to &lt;em&gt;type B&lt;/em&gt; when transporting data over
+the wire or when converting from a generic data representation to a
+domain-specific representation.&lt;/p&gt;
+&lt;p&gt;So let’s imagine we are building a system that manages user’s accounts and we
+have the following use-cases to cover:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Convert from &lt;a href=&quot;https://www.w3schools.com/xml/xml_whatis.asp&quot;&gt;XML&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Convert from &lt;a href=&quot;https://www.json.org/json-en.html&quot;&gt;JSON&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Convert from &lt;a href=&quot;https://developers.google.com/protocol-buffers&quot;&gt;Protocol Buffers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/1f37e8bda1d594b050535961a1de6a60/marshal-unmarshal-data-format.svg&quot; aria-label=&quot;Here we have a
+diagram with 3 marshallers: XML, JSON and protobuf. Each of them marshals data
+into its respective format. Then, we have Account with the Unmarshal method
+which will take a single argument as input and based on the format, it will
+figure out how to Unmarshal to an Account&quot; width=&quot;100%&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;If the image is too small, please click &lt;a
+href=&quot;/1f37e8bda1d594b050535961a1de6a60/marshal-unmarshal-data-format.svg&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt; to see it
+bigger in a different tab&lt;/i&gt;&lt;/p&gt;
+&lt;h3&gt;Code examples&lt;/h3&gt;
+&lt;details&gt;
+&lt;summary&gt;Unit tests (click to expand)&lt;/summary&gt;
+&lt;p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Test_Unmarshal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	tests &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		name &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
+		in   &lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+		out  Account
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;should unmarshal Account from XML&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			in&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;`
+			&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+			&amp;lt;User&gt;
+				&amp;lt;Name&gt;Mary&amp;lt;/Name&gt;
+				&amp;lt;Type&gt;Gold&amp;lt;/Type&gt;
+			&amp;lt;/User&gt;
+			`&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			out&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Account&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				Name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Mary&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+		&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;should unmarshal Account from JSON&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			in&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;`
+			{
+				&quot;user&quot;: {
+					&quot;name&quot;: &quot;John&quot;,
+					&quot;type&quot;: &quot;Premium&quot;,
+					&quot;created_at&quot;: &quot;2020-01-01&quot;
+				}
+			}
+			`&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			out&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Account&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				Name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;John&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+		&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;should unmarshal Account from protobuf&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			in&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ProtobufAccount&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				AccountName&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Bob&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			out&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Account&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				Name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Bob&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+		&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;should not unmarshal from CSV format since it doesn&apos;t support yet&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			in&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;`Name,Mary`&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+			out&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;  Account&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+		&lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; tt &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;range&lt;/span&gt; tests &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;tt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; a Account
+			err &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Unmarshal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;tt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;in&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+			&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; err &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				expectedError &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Errorf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;unable to unmarshal %v, format not supported.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; tt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;in&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+				&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; expectedError&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+					t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Errorf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;unexpected error while trying to unmarshal account: %v&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+				&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+			&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; tt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;out &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; a &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Errorf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;test failed. wanted: %v, got: %v&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; tt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;out&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;Implementation (click to expand)&lt;/summary&gt;
+&lt;p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// xmlPayload represents the XML payload with user data&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; xmlPayload &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	Name &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;`xml:User&gt;Name`&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// jsonPayload represents the JSON payload wiht user data&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; jsonPayload &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	User &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		Name &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;`json:&quot;name&quot;`&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;`json:&quot;user&quot;`&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// ProtobufAccount represents a generated Go code from a protobuf definition&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// More details: https://developers.google.com/protocol-buffers/docs/reference/go-generated&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; ProtobufAccount &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	AccountName &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Account is the domain representation of an account in the system. It is the&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// main entity for the example we&apos;re using.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Account &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	Name &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;Account&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;unmarshalXML&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; res xmlPayload
+	err &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; xml&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Unmarshal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;res&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Account&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		Name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Name&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; err
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;Account&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;unmarshalJSON&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; res jsonPayload
+	err &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; json&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Unmarshal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;res&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Account&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		Name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;User&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Name&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; err
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;Account&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;unmarshalProtobuf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src ProtobufAccount&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Account&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		Name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; src&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;AccountName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Unmarshal takes an interface{} and try to convert into Account type&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;Account&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Unmarshal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src &lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;switch&lt;/span&gt; src&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+		b &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; src&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		&lt;span class=&quot;token comment&quot;&gt;// naive logic to determine if it is XML&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; strings&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Contains&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&amp;lt;?xml&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;unmarshalXML&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+		&lt;span class=&quot;token comment&quot;&gt;// naive logic to determine if it is JSON&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; strings&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Contains&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;`&quot;user&quot;:`&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;unmarshalJSON&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; ProtobufAccount&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;unmarshalProtobuf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ProtobufAccount&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Errorf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;unable to unmarshal %v, format not supported.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; src&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;I’d like to explore &lt;strong&gt;beyond JSON parsing&lt;/strong&gt; since there are tons of articles
+about &lt;a href=&quot;https://gobyexample.com/json&quot;&gt;parsing JSON data in go&lt;/a&gt; in the internet.&lt;/p&gt;
+&lt;h3&gt;Converting from one domain to another&lt;/h3&gt;
+&lt;p&gt;In this particular case, let’s imagine we have an e-commerce system that goes
+from adding item to a cart, placing an order and sending an invoice to the
+customer.&lt;/p&gt;
+&lt;p&gt;Once the customer selects an item and adds it to her/his cart, the item will be
+part of an order that will also be listed in the invoice afterwards. However,
+the “item” might not have the same meaning across the system.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I would suggest a read on &lt;a href=&quot;https://martinfowler.com/bliki/BoundedContext.html&quot;&gt;Bounded
+Context&lt;/a&gt; for more details.
+It is described in more depth in the book
+&lt;a href=&quot;https://www.amazon.com/gp/product/0321125215?ie=UTF8&amp;#x26;tag=martinfowlerc-20&amp;#x26;linkCode=as2&amp;#x26;camp=1789&amp;#x26;creative=9325&amp;#x26;creativeASIN=0321125215&quot;&gt;Domain-Driven-Design&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Without further ado, let’s check how &lt;code class=&quot;language-text&quot;&gt;Marshal&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt; can be used to
+translate different data representations across different domains:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/00ef3c2ecfb4063dcdeb3887c4a9e4c1/marshal-unmarshal-domains.svg&quot; aria-label=&quot;Here we have three
+circles, which one representing a Software COmponent. On each circle, we have
+boxes that represent actions, events and entities. Every component communicates
+with each other via events and the data is translated between circles throughout
+Marshalling and Unmarshalling&quot; width=&quot;100%&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;If the image is too small, please click &lt;a
+href=&quot;/00ef3c2ecfb4063dcdeb3887c4a9e4c1/marshal-unmarshal-domains.svg&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt; to see it
+bigger in a different tab&lt;/i&gt;&lt;/p&gt;
+&lt;p&gt;Because now the components are now communicating via a common interface
+(&lt;code class=&quot;language-text&quot;&gt;Marshal&lt;/code&gt;/&lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt;), the data format that is used to transfer between
+components became merely an implementation detail. It no longer matters if an item,
+when unmarshalled to an Order, will be a JSON payload, protobuf or a just data
+transformation between &lt;a href=&quot;https://golang.org/pkg/go/types/&quot;&gt;go types&lt;/a&gt;. As the
+system supports different ways of data transformation (new domains being
+introduced, new formats, new integrations), the core flow doesn’t need to
+change, because now &lt;code class=&quot;language-text&quot;&gt;Marshal&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt; abstracts that away.&lt;/p&gt;
+&lt;h2&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;Although the &lt;em&gt;Marshalling&lt;/em&gt; terminology might sound too low level (i.e. feels
+more about computation, less about business domain), it is a &lt;strong&gt;consistent way&lt;/strong&gt;
+to transform data from one format to another, where this transformation can be
+from low-level bytes into an “object” or it can be used to translate from one
+domain representation to another.&lt;/p&gt;
+&lt;p&gt;One might argue that having a single interface to transform data between domains
+is nothing novel. However, having this &lt;strong&gt;semantics&lt;/strong&gt; established is quite useful
+so developers won’t need to come up with new conventions all over again.
+Although I appreciate always having new ways to express real-life problems in
+form of code, I believe that data transformation, most of the time, are stepping
+stones for problem-solving, not the end goal. So if there is a standard way
+to deal with this mundane task, I found it very welcome.&lt;/p&gt;
+&lt;p&gt;But hey, this is only my opinion at the time of this post! If you read this far,
+I hope I didn’t waste your time!&lt;/p&gt;
+&lt;h3&gt;Thank you for reading&lt;/h3&gt;
+&lt;p&gt;I hope you enjoy this post, if you have any feedback or questions, hit me up on
+&lt;a href=&quot;mailto:alabeduarte@gmail.com&quot;&gt;alabeduarte@gmail.com&lt;/a&gt;, I’d be happy to hear your thoughts and be better next
+time!&lt;/p&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Marshalling_(computer_science)&quot;&gt;Marshalling (computer science)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Interface_(computing)&quot;&gt;Interface (computing)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Parsing&quot;&gt;Parsing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gobyexample.com/json&quot;&gt;Go By Example: JSON&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Distributed_computing&quot;&gt;Distributed Systems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.w3schools.com/xml/xml_whatis.asp&quot;&gt;XML&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.json.org/json-en.html&quot;&gt;JSON&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developers.google.com/protocol-buffers&quot;&gt;Protocol Buffers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://martinfowler.com/bliki/BoundedContext.html&quot;&gt;Bounded Context&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/0321125215?ie=UTF8&amp;#x26;tag=martinfowlerc-20&amp;#x26;linkCode=as2&amp;#x26;camp=1789&amp;#x26;creative=9325&amp;#x26;creativeASIN=0321125215&quot;&gt;Domain-Driven Design&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[3 approaches to consider when rendering conditional content in React]]></title><description><![CDATA[In this post, I’d like to share alternative approaches for dealing with
 conditional rendering in
 React. I will try to list out the pros and…]]></description><link>https://alabeduarte.com/3-approaches-conditional-rendering-react/</link><guid isPermaLink="false">https://alabeduarte.com/3-approaches-conditional-rendering-react/</guid><pubDate>Fri, 19 Feb 2021 07:54:24 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to share alternative approaches for dealing with
 &lt;a href=&quot;https://reactjs.org/docs/conditional-rendering.html&quot;&gt;conditional rendering&lt;/a&gt; in
