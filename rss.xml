@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 10:51:09 GMT</lastBuildDate><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 11:01:59 GMT</lastBuildDate><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in Go programs. I’ll give some examples
 of how it…]]></description><link>https://alabeduarte.com/the-semantics-of-marshalling-in-go/</link><guid isPermaLink="false">https://alabeduarte.com/the-semantics-of-marshalling-in-go/</guid><pubDate>Fri, 26 Mar 2021 10:38:35 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in &lt;a href=&quot;https://golang.org/&quot;&gt;Go&lt;/a&gt; programs. I’ll give some examples
@@ -93,9 +93,6 @@ diagram with 3 marshallers: XML, JSON and protobuf. Each of them marshals data
 into its respective format. Then, we have Account with the Unmarshal method
 which will take a single argument as input and based on the format, it will
 figure out how to Unmarshal to an Account&quot; width=&quot;100%&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;i&gt;If the image is too small, please click &lt;a
-href=&quot;/1f37e8bda1d594b050535961a1de6a60/marshal-unmarshal-data-format.svg&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt; to see it
-bigger in a different tab&lt;/i&gt;&lt;/p&gt;
 &lt;h3&gt;Code examples&lt;/h3&gt;
 &lt;details&gt;
 &lt;summary&gt;Unit tests (click to expand)&lt;/summary&gt;
@@ -270,9 +267,6 @@ circles, which one representing a Software COmponent. On each circle, we have
 boxes that represent actions, events and entities. Every component communicates
 with each other via events and the data is translated between circles throughout
 Marshalling and Unmarshalling&quot; width=&quot;100%&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;i&gt;If the image is too small, please click &lt;a
-href=&quot;/00ef3c2ecfb4063dcdeb3887c4a9e4c1/marshal-unmarshal-domains.svg&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt; to see it
-bigger in a different tab&lt;/i&gt;&lt;/p&gt;
 &lt;p&gt;Because now the components are now communicating via a common interface
 (&lt;code class=&quot;language-text&quot;&gt;Marshal&lt;/code&gt;/&lt;code class=&quot;language-text&quot;&gt;Unmarshal&lt;/code&gt;), the data format that is used to transfer between
 components became merely an implementation detail. It no longer matters if an item,

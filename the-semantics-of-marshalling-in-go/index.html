@@ -94,9 +94,6 @@ diagram with 3 marshallers: XML, JSON and protobuf. Each of them marshals data
 into its respective format. Then, we have Account with the Unmarshal method
 which will take a single argument as input and based on the format, it will
 figure out how to Unmarshal to an Account" width="100%"></p>
-<p><i>If the image is too small, please click <a
-href="/1f37e8bda1d594b050535961a1de6a60/marshal-unmarshal-data-format.svg" target="_blank">here</a> to see it
-bigger in a different tab</i></p>
 <h3>Code examples</h3>
 <details>
 <summary>Unit tests (click to expand)</summary>
@@ -271,9 +268,6 @@ circles, which one representing a Software COmponent. On each circle, we have
 boxes that represent actions, events and entities. Every component communicates
 with each other via events and the data is translated between circles throughout
 Marshalling and Unmarshalling" width="100%"></p>
-<p><i>If the image is too small, please click <a
-href="/00ef3c2ecfb4063dcdeb3887c4a9e4c1/marshal-unmarshal-domains.svg" target="_blank">here</a> to see it
-bigger in a different tab</i></p>
 <p>Because now the components are now communicating via a common interface
 (<code class="language-text">Marshal</code>/<code class="language-text">Unmarshal</code>), the data format that is used to transfer between
 components became merely an implementation detail. It no longer matters if an item,
