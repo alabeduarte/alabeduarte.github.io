@@ -11,5 +11,4 @@ the moment to atually write my own stuff, my own experiences you know?
 Now, I'm finally ready – I guess. The idea is document and share my learnings so
 that we (you, dear reader, and myself) can come back later and check things out.
 
-I hope you enjoy the posts and I'd love to get some feedback. To do so, feel
-free to contact me via email: alabeduarte@gmail.com.
+I hope you enjoy the posts!
