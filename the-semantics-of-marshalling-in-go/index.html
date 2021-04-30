@@ -192,7 +192,7 @@ figure out how to Unmarshal to an Account" width="100%"></p>
 <span class="token comment">// ProtobufAccount represents a generated Go code from a protobuf definition</span>
 <span class="token comment">// More details: https://developers.google.com/protocol-buffers/docs/reference/go-generated</span>
 <span class="token keyword">type</span> ProtobufAccount <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-	AccountName <span class="token builtin">string</span>
+	AccountName <span class="token builtin">string</span> <span class="token string">`protobuf:"bytes,1,opt,name=acount_name,proto3"`</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">// Account is the domain representation of an account in the system. It is the</span>
@@ -204,7 +204,7 @@ figure out how to Unmarshal to an Account" width="100%"></p>
 <span class="token keyword">func</span> <span class="token punctuation">(</span>a <span class="token operator">*</span>Account<span class="token punctuation">)</span> <span class="token function">unmarshalXML</span><span class="token punctuation">(</span>src <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
 	<span class="token keyword">var</span> res xmlPayload
 	err <span class="token operator">:=</span> xml<span class="token punctuation">.</span><span class="token function">Unmarshal</span><span class="token punctuation">(</span>src<span class="token punctuation">,</span> <span class="token operator">&amp;</span>res<span class="token punctuation">)</span>
-	<span class="token operator">*</span>a <span class="token operator">=</span> Account<span class="token punctuation">{</span>
+	a <span class="token operator">=</span> <span class="token operator">&amp;</span>Account<span class="token punctuation">{</span>
 		Name<span class="token punctuation">:</span> res<span class="token punctuation">.</span>Name<span class="token punctuation">,</span>
 	<span class="token punctuation">}</span>
 	<span class="token keyword">return</span> err
@@ -213,14 +213,14 @@ figure out how to Unmarshal to an Account" width="100%"></p>
 <span class="token keyword">func</span> <span class="token punctuation">(</span>a <span class="token operator">*</span>Account<span class="token punctuation">)</span> <span class="token function">unmarshalJSON</span><span class="token punctuation">(</span>src <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
 	<span class="token keyword">var</span> res jsonPayload
 	err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Unmarshal</span><span class="token punctuation">(</span>src<span class="token punctuation">,</span> <span class="token operator">&amp;</span>res<span class="token punctuation">)</span>
-	<span class="token operator">*</span>a <span class="token operator">=</span> Account<span class="token punctuation">{</span>
+	a <span class="token operator">=</span> <span class="token operator">&amp;</span>Account<span class="token punctuation">{</span>
 		Name<span class="token punctuation">:</span> res<span class="token punctuation">.</span>User<span class="token punctuation">.</span>Name<span class="token punctuation">,</span>
 	<span class="token punctuation">}</span>
 	<span class="token keyword">return</span> err
 <span class="token punctuation">}</span>
 
 <span class="token keyword">func</span> <span class="token punctuation">(</span>a <span class="token operator">*</span>Account<span class="token punctuation">)</span> <span class="token function">unmarshalProtobuf</span><span class="token punctuation">(</span>src ProtobufAccount<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
-	<span class="token operator">*</span>a <span class="token operator">=</span> Account<span class="token punctuation">{</span>
+	a <span class="token operator">=</span> <span class="token operator">&amp;</span>Account<span class="token punctuation">{</span>
 		Name<span class="token punctuation">:</span> src<span class="token punctuation">.</span>AccountName<span class="token punctuation">,</span>
 	<span class="token punctuation">}</span>
 
