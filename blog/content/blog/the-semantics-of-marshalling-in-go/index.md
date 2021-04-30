@@ -232,7 +232,7 @@ type jsonPayload struct {
 // ProtobufAccount represents a generated Go code from a protobuf definition
 // More details: https://developers.google.com/protocol-buffers/docs/reference/go-generated
 type ProtobufAccount struct {
-	AccountName string
+	AccountName string `protobuf:"bytes,1,opt,name=acount_name,proto3"`
 }
 
 // Account is the domain representation of an account in the system. It is the
@@ -244,7 +244,7 @@ type Account struct {
 func (a *Account) unmarshalXML(src []byte) error {
 	var res xmlPayload
 	err := xml.Unmarshal(src, &res)
-	*a = Account{
+	a = &Account{
 		Name: res.Name,
 	}
 	return err
@@ -253,14 +253,14 @@ func (a *Account) unmarshalXML(src []byte) error {
 func (a *Account) unmarshalJSON(src []byte) error {
 	var res jsonPayload
 	err := json.Unmarshal(src, &res)
-	*a = Account{
+	a = &Account{
 		Name: res.User.Name,
 	}
 	return err
 }
 
 func (a *Account) unmarshalProtobuf(src ProtobufAccount) error {
-	*a = Account{
+	a = &Account{
 		Name: src.AccountName,
 	}
 
