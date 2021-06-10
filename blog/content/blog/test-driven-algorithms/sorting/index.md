@@ -1,8 +1,11 @@
 ---
 title: Test-Driven Algorithms - Sorting
 date: "2021-06-10T06:58:04.414Z"
-description: "This article is to explore a couple of implementations of sorting
-algorithms driven by unit tests using is Go."
+description: "In this article, I’d like to explore a couple of implementations
+of sorting algorithms. However, I’d like to do so driven by unit tests.
+The examples are written in Go but don't worry if you never worked with Go
+before. The emphasis here is on the journey and the joy of building solutions
+guided by tests!"
 ---
 
 Sorting algorithms are heavily used in Software Development in one way or
@@ -11,7 +14,7 @@ functions at your disposal but depending on the use case, knowing which sorting
 algorithm is being applied under the hood can be key to measure the impacts of
 the change on the working Software.
 
-In this article I'd like to explore a couple of implementations of sorting
+In this article, I'd like to explore a couple of implementations of sorting
 algorithms but I'd like to do so driven by unit tests. I haven't seen much
 content online that explore this approach so I hope this sparks your interest.
 
