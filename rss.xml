@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 10 Jun 2021 07:10:43 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 10 Jun 2021 10:45:30 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some…]]></description><link>https://alabeduarte.com/test-driven-algorithms/sorting/</link><guid isPermaLink="false">https://alabeduarte.com/test-driven-algorithms/sorting/</guid><pubDate>Thu, 10 Jun 2021 06:58:04 GMT</pubDate><content:encoded>&lt;p&gt;Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some sorting
 functions at your disposal but depending on the use case, knowing which sorting
@@ -133,8 +133,7 @@ the minimal effort possible to achieve that:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
 ok      alabeduarte.com 0.766s
 PASS (0.39 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now that our two scenarios are passing, let’s evaluate our code so far.&lt;/p&gt;
-&lt;p&gt;…&lt;/p&gt;
+&lt;p&gt;Now that our two scenarios are passing, let’s evaluate our code so far…&lt;/p&gt;
 &lt;p&gt;Ok, looking at the code, there’s no much I can think of to improve, except for
 the fact that our tests are a bit verbose at the moment. We’re defining
 variables &lt;code class=&quot;language-text&quot;&gt;elements&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;expected&lt;/code&gt; in our tests, then we’re doing the following
