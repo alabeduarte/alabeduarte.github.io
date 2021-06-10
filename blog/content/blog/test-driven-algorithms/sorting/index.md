@@ -189,9 +189,7 @@ ok      alabeduarte.com 0.766s
 PASS (0.39 seconds)
 ```
 
-Now that our two scenarios are passing, let's evaluate our code so far.
-
-...
+Now that our two scenarios are passing, let's evaluate our code so far...
 
 Ok, looking at the code, there's no much I can think of to improve, except for
 the fact that our tests are a bit verbose at the moment. We're defining
