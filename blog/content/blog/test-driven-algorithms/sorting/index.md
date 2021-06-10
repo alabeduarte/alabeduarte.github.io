@@ -320,9 +320,9 @@ this algorithm:
 
 Should we fix them? **Yes, but we should do so only we have tests.**
 
-> It is pretty clear that our code is doing the wrong thing. But as tempting as
-> it might sound, let's only add a new code into our implementation if we have a
-> test scenario that would **justify** its existence!
+It is pretty clear that our code is doing the wrong thing. But as tempting as it
+might sound, let's only add a new code into our implementation if we have a test
+scenario that would **justify** its existence!
 
 So let's start with the following test scenario:
 
@@ -790,3 +790,12 @@ it** and I hope I could make it clear and enjoyable.
 I hope you enjoy this post, if you have any feedback or questions, hit me up on
 <alabeduarte@gmail.com>, I'd be happy to hear your thoughts and be better next
 time!
+
+### Other References
+
+* [Test-Driven Development by
+  Example](https://www.amazon.com.au/Test-Driven-Development-Kent-Beck/dp/0321146530)
+* [Growing Object-Oriented Software, Guided by
+  Tests](https://www.amazon.com.au/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627)
+* [Test-Driven Development: Teste e Design no Mundo Real (Portuguese
+  Edition)](https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W)
