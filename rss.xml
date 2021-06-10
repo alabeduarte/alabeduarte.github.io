@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 10 Jun 2021 06:58:37 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 10 Jun 2021 07:10:43 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some…]]></description><link>https://alabeduarte.com/test-driven-algorithms/sorting/</link><guid isPermaLink="false">https://alabeduarte.com/test-driven-algorithms/sorting/</guid><pubDate>Thu, 10 Jun 2021 06:58:04 GMT</pubDate><content:encoded>&lt;p&gt;Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some sorting
 functions at your disposal but depending on the use case, knowing which sorting
 algorithm is being applied under the hood can be key to measure the impacts of
 the change on the working Software.&lt;/p&gt;
-&lt;p&gt;In this article I’d like to explore a couple of implementations of sorting
+&lt;p&gt;In this article, I’d like to explore a couple of implementations of sorting
 algorithms but I’d like to do so driven by unit tests. I haven’t seen much
 content online that explore this approach so I hope this sparks your interest.&lt;/p&gt;
 &lt;h2&gt;A recap on what Sorting Algorithms are&lt;/h2&gt;
