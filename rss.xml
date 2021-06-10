@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 10 Jun 2021 10:45:30 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 10 Jun 2021 21:13:57 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some…]]></description><link>https://alabeduarte.com/test-driven-algorithms/sorting/</link><guid isPermaLink="false">https://alabeduarte.com/test-driven-algorithms/sorting/</guid><pubDate>Thu, 10 Jun 2021 06:58:04 GMT</pubDate><content:encoded>&lt;p&gt;Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some sorting
 functions at your disposal but depending on the use case, knowing which sorting
@@ -231,11 +231,9 @@ the rest, returning an array with fewer elements&lt;/li&gt;
 swapping the first two elements&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Should we fix them? &lt;strong&gt;Yes, but we should do so only we have tests.&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It is pretty clear that our code is doing the wrong thing. But as tempting as
-it might sound, let’s only add a new code into our implementation if we have a
-test scenario that would &lt;strong&gt;justify&lt;/strong&gt; its existence!&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;It is pretty clear that our code is doing the wrong thing. But as tempting as it
+might sound, let’s only add a new code into our implementation if we have a test
+scenario that would &lt;strong&gt;justify&lt;/strong&gt; its existence!&lt;/p&gt;
 &lt;p&gt;So let’s start with the following test scenario:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
 
@@ -611,7 +609,16 @@ it&lt;/strong&gt; and I hope I could make it clear and enjoyable.&lt;/p&gt;
 &lt;h3&gt;Thank you for reading&lt;/h3&gt;
 &lt;p&gt;I hope you enjoy this post, if you have any feedback or questions, hit me up on
 &lt;a href=&quot;mailto:alabeduarte@gmail.com&quot;&gt;alabeduarte@gmail.com&lt;/a&gt;, I’d be happy to hear your thoughts and be better next
-time!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
+time!&lt;/p&gt;
+&lt;h3&gt;Other References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Test-Driven-Development-Kent-Beck/dp/0321146530&quot;&gt;Test-Driven Development by
+Example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627&quot;&gt;Growing Object-Oriented Software, Guided by
+Tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W&quot;&gt;Test-Driven Development: Teste e Design no Mundo Real (Portuguese
+Edition)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in Go programs. I’ll give some examples
 of how it…]]></description><link>https://alabeduarte.com/the-semantics-of-marshalling-in-go/</link><guid isPermaLink="false">https://alabeduarte.com/the-semantics-of-marshalling-in-go/</guid><pubDate>Fri, 26 Mar 2021 10:38:35 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in &lt;a href=&quot;https://golang.org/&quot;&gt;Go&lt;/a&gt; programs. I’ll give some examples
