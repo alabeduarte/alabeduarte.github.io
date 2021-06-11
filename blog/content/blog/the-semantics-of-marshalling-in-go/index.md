@@ -361,5 +361,5 @@ time!
 * [XML](https://www.w3schools.com/xml/xml_whatis.asp)
 * [JSON](https://www.json.org/json-en.html)
 * [Protocol Buffers](https://developers.google.com/protocol-buffers)
-* [Bounded Context](https://martinfowler.com/bliki/BoundedContext.html)
-* [Domain-Driven Design](https://www.amazon.com/gp/product/0321125215?ie=UTF8&tag=martinfowlerc-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0321125215)
+* [Bounded Context by Martin Fowler](https://martinfowler.com/bliki/BoundedContext.html)
+* [Domain-Driven Design by Eric Evans](https://www.amazon.com/gp/product/0321125215?ie=UTF8&tag=martinfowlerc-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0321125215)

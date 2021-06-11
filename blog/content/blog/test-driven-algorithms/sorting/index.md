@@ -794,8 +794,10 @@ time!
 ### Other References
 
 * [Test-Driven Development by
-  Example](https://www.amazon.com.au/Test-Driven-Development-Kent-Beck/dp/0321146530)
+  Example by Kent Beck](https://www.amazon.com.au/Test-Driven-Development-Kent-Beck/dp/0321146530)
 * [Growing Object-Oriented Software, Guided by
-  Tests](https://www.amazon.com.au/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627)
+  Tests by Nat Pryce](https://www.amazon.com.au/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627)
 * [Test-Driven Development: Teste e Design no Mundo Real (Portuguese
-  Edition)](https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W)
+  Edition) by Mauricio Aniche](https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W)
+* [TDD (Test-Driven Development) - My personal
+  journey](https://alabeduarte.com/tdd/)
