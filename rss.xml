@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 10 Jun 2021 21:13:57 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 11 Jun 2021 02:45:40 GMT</lastBuildDate><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some…]]></description><link>https://alabeduarte.com/test-driven-algorithms/sorting/</link><guid isPermaLink="false">https://alabeduarte.com/test-driven-algorithms/sorting/</guid><pubDate>Thu, 10 Jun 2021 06:58:04 GMT</pubDate><content:encoded>&lt;p&gt;Sorting algorithms are heavily used in Software Development in one way or
 another. Depending on the language, you might have in handy some sorting
 functions at your disposal but depending on the use case, knowing which sorting
@@ -613,11 +613,13 @@ time!&lt;/p&gt;
 &lt;h3&gt;Other References&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Test-Driven-Development-Kent-Beck/dp/0321146530&quot;&gt;Test-Driven Development by
-Example&lt;/a&gt;&lt;/li&gt;
+Example by Kent Beck&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627&quot;&gt;Growing Object-Oriented Software, Guided by
-Tests&lt;/a&gt;&lt;/li&gt;
+Tests by Nat Pryce&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W&quot;&gt;Test-Driven Development: Teste e Design no Mundo Real (Portuguese
-Edition)&lt;/a&gt;&lt;/li&gt;
+Edition) by Mauricio Aniche&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://alabeduarte.com/tdd/&quot;&gt;TDD (Test-Driven Development) - My personal
+journey&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in Go programs. I’ll give some examples
 of how it…]]></description><link>https://alabeduarte.com/the-semantics-of-marshalling-in-go/</link><guid isPermaLink="false">https://alabeduarte.com/the-semantics-of-marshalling-in-go/</guid><pubDate>Fri, 26 Mar 2021 10:38:35 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to discuss how Marshalling/Unmarshalling process is
@@ -924,8 +926,8 @@ time!&lt;/p&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.w3schools.com/xml/xml_whatis.asp&quot;&gt;XML&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.json.org/json-en.html&quot;&gt;JSON&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://developers.google.com/protocol-buffers&quot;&gt;Protocol Buffers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://martinfowler.com/bliki/BoundedContext.html&quot;&gt;Bounded Context&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/0321125215?ie=UTF8&amp;#x26;tag=martinfowlerc-20&amp;#x26;linkCode=as2&amp;#x26;camp=1789&amp;#x26;creative=9325&amp;#x26;creativeASIN=0321125215&quot;&gt;Domain-Driven Design&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://martinfowler.com/bliki/BoundedContext.html&quot;&gt;Bounded Context by Martin Fowler&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/0321125215?ie=UTF8&amp;#x26;tag=martinfowlerc-20&amp;#x26;linkCode=as2&amp;#x26;camp=1789&amp;#x26;creative=9325&amp;#x26;creativeASIN=0321125215&quot;&gt;Domain-Driven Design by Eric Evans&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[3 approaches to consider when rendering conditional content in React]]></title><description><![CDATA[In this post, I’d like to share alternative approaches for dealing with
 conditional rendering in
 React. I will try to list out the pros and…]]></description><link>https://alabeduarte.com/3-approaches-conditional-rendering-react/</link><guid isPermaLink="false">https://alabeduarte.com/3-approaches-conditional-rendering-react/</guid><pubDate>Fri, 19 Feb 2021 07:54:24 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to share alternative approaches for dealing with
@@ -1941,11 +1943,11 @@ ability to iterate over my understanding of the problem at hand often.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://agilemanifesto.org&quot;&gt;Agile Manifesto&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Test-Driven-Development-Kent-Beck/dp/0321146530&quot;&gt;Test-Driven Development by
-Example&lt;/a&gt;&lt;/li&gt;
+Example by Kent Beck&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627&quot;&gt;Growing Object-Oriented Software, Guided by
-Tests&lt;/a&gt;&lt;/li&gt;
+Tests by Nat Pryce&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W&quot;&gt;Test-Driven Development: Teste e Design no Mundo Real (Portuguese
-Edition)&lt;/a&gt;&lt;/li&gt;
+Edition) by Mauricio Aniche&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[This Blog]]></title><description><![CDATA[I’ve had some opportunities to write technical blogs and documentation
 throughout my career (in the context of my day-to-day job) but I…]]></description><link>https://alabeduarte.com/this-blog/</link><guid isPermaLink="false">https://alabeduarte.com/this-blog/</guid><pubDate>Fri, 01 Jan 2021 13:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve had some opportunities to write technical blogs and documentation
 throughout my career (in the context of my day-to-day job) but I always deferred
