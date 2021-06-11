@@ -493,8 +493,8 @@ func generateRandomElements(n int) []int {
 	elements := make([]int, n, n)
 
 	// populate the slice with random elements
-	for _ = range elements {
-		elements = append(elements, rand.Int())
+	for i, _ := range elements {
+		elements[i] = rand.Int()
 	}
 
 	return elements
@@ -546,18 +546,18 @@ goos: darwin
 goarch: amd64
 pkg: alabeduarte.com
 cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
-BenchmarkBubbleSort3-12                 11577649               101.7 ns/op
-BenchmarkBubbleSort10-12                 2687889               427.9 ns/op
-BenchmarkBubbleSort20-12                  894934              1340 ns/op
-BenchmarkBubbleSort50-12                  205489              6001 ns/op
-BenchmarkBubbleSort100-12                  60349             18323 ns/op
-BenchmarkBubbleSort1000-12                   966           1260727 ns/op
-BenchmarkBubbleSort100000-12                   1        20640230871 ns/op
+BenchmarkBubbleSort3-12                 17688249                67.22 ns/op
+BenchmarkBubbleSort10-12                 4173184               303.4 ns/op
+BenchmarkBubbleSort20-12                 1228124              1031 ns/op
+BenchmarkBubbleSort50-12                  240789              4240 ns/op
+BenchmarkBubbleSort100-12                  90360             13976 ns/op
+BenchmarkBubbleSort1000-12                  1626            733388 ns/op
+BenchmarkBubbleSort100000-12                   1        14456783580 ns/op
 ```
 
 As you can see, when having 100,000 elements in the array, my machine took
-`20640230871` nanoseconds to perform the sorting, which was equivalent to about
-20 seconds.
+`14456783580` nanoseconds to perform the sorting, which was equivalent to about
+14 seconds.
 
 Let's try the same using the [Go's standard
 library](https://golang.org/pkg/sort/) implementation to sort our elements.
@@ -598,24 +598,24 @@ goos: darwin
 goarch: amd64
 pkg: alabeduarte.com
 cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
-BenchmarkBubbleSort3-12                 11743804               102.6 ns/op
-BenchmarkBubbleSort10-12                 2891732               441.7 ns/op
-BenchmarkBubbleSort20-12                  935710              1309 ns/op
-BenchmarkBubbleSort50-12                  204036              5818 ns/op
-BenchmarkBubbleSort100-12                  62976             19958 ns/op
-BenchmarkBubbleSort1000-12                   925           1316431 ns/op
-BenchmarkBubbleSort100000-12                   1        19976397622 ns/op
+BenchmarkBubbleSort3-12                 18284776                67.53 ns/op
+BenchmarkBubbleSort10-12                 4207515               295.9 ns/op
+BenchmarkBubbleSort20-12                 1201567              1006 ns/op
+BenchmarkBubbleSort50-12                  276207              4262 ns/op
+BenchmarkBubbleSort100-12                  89107             13813 ns/op
+BenchmarkBubbleSort1000-12                  1620            755969 ns/op
+BenchmarkBubbleSort100000-12                   1        14532398965 ns/op
 
-BenchmarkGoSort3-12                      7070913               172.9 ns/op
-BenchmarkGoSort10-12                     1706870               692.7 ns/op
-BenchmarkGoSort20-12                      783583              1652 ns/op
-BenchmarkGoSort50-12                      276848              4444 ns/op
-BenchmarkGoSort100-12                     124602              9288 ns/op
-BenchmarkGoSort1000-12                     10000            118388 ns/op
-BenchmarkGoSort100000-12                      63          18260485 ns/op
+BenchmarkGoSort3-12                      9781417               124.5 ns/op
+BenchmarkGoSort10-12                     2595421               439.4 ns/op
+BenchmarkGoSort20-12                     1000000              1108 ns/op
+BenchmarkGoSort50-12                      357010              3252 ns/op
+BenchmarkGoSort100-12                     160202              7618 ns/op
+BenchmarkGoSort1000-12                     10000            100856 ns/op
+BenchmarkGoSort100000-12                      75          16205598 ns/op
 ```
 
-As we can see, our algorithm using bubble sort seems a little better until 50
+As we can see, our algorithm using bubble sort seems a little better until 20
 elements, where go standard library start to shine being way faster than ours.
 
 Since the go standard library is more efficient, let's change our implementation
@@ -676,7 +676,23 @@ import (
 // sorted.
 func Sort(elements []int) []int {
 
-	sort.Ints(elements)
+	n := len(elements)
+	if n <= 1 {
+		return elements
+	}
+
+	swapped := true
+
+	for swapped {
+		swapped = false
+
+		for i := 0; i < n-1; i++ {
+			if elements[i] > elements[i+1] {
+				elements[i], elements[i+1] = elements[i+1], elements[i]
+				swapped = true
+			}
+		}
+	}
 
 	return elements
 }
@@ -726,8 +742,8 @@ func generateRandomElements(n int) []int {
 	elements := make([]int, n, n)
 
 	// populate the slice with random elements
-	for _ = range elements {
-		elements = append(elements, rand.Int())
+	for i, _ := range elements {
+		elements[i] = rand.Int()
 	}
 
 	return elements
