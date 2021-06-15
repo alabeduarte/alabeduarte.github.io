@@ -59,7 +59,7 @@ const Bio = () => {
             >
               SafetyCulture
             </a>
-            .
+            . Opinions are mine.
           </span>
           <ul>
             <li>
