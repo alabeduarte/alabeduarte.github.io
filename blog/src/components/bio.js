@@ -59,6 +59,14 @@ const Bio = () => {
             >
               SafetyCulture
             </a>
+            , formerly{" "}
+            <a
+              href="https://www.thoughtworks.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ThoughtWorks
+            </a>
             . Opinions are mine.
           </span>
           <ul>
