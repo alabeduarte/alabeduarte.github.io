@@ -67,8 +67,9 @@ const Bio = () => {
             >
               ThoughtWorks
             </a>
-            . Opinions are mine.
+            .
           </span>
+          <p>Opinions are mine.</p>
           <ul>
             <li>
               <a href={`https://twitter.com/${social.twitter}`}>
