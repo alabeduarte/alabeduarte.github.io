@@ -26,9 +26,9 @@ Once I'm happy with our shared understanding, I ask Claude Code to write this do
 
 With our context documented, I start fresh with a `/clear` command. This clean slate is intentional: it forces me to be explicit about what context is needed for the next phase.
 
-Now I can say: "Based on @AUTHENTICATION_FLOW.md, I want to add session timeout handling to log users out after 30 minutes of inactivity."
+Now I can say: "Based on @SEARCH_FEATURE.md, I want to add pagination to our search results that currently return everything."
 
-But here's where I add my own thinking to the mix. I'll usually have ideas about implementation approaches, so I'll include them: "I'm thinking we could track the last activity timestamp in the JWT claims, or we could store it server-side. The JWT approach is simpler but increases token size, while server-side gives us more control but requires state management. What are your thoughts on these trade-offs?"
+But here's where I add my own thinking to the mix. I'll usually have ideas about implementation approaches, so I'll include them: "We could use offset-based pagination which is simple, or cursor-based pagination which handles data changes better. Offset is easier to implement and gives page numbers, but cursor pagination performs better with large datasets. What's the right choice here?"
 
 I do this in plan mode (rotate shift + tab in Claude Code), which helps maintain focus on planning rather than jumping straight to implementation. The back-and-forth here is crucial, I challenge Claude Code with questions, explore edge cases, and refine until I'm confident we have not only a direction I'm happy with but also documented reasoning about alternatives considered.
 
@@ -50,7 +50,7 @@ This creates a powerful feedback loop. The tests become the specification, and C
 
 Time for another `/clear`, starting fresh for the implementation phase. This separation between planning and implementation has been crucial for keeping the context manageable.
 
-My editor of choice is Neovim with the [claudecode.nvim plugin](https://github.com/coder/claudecode.nvim), which has been particularly helpful for maintaining focus. Instead of saying "implement phase 2", I can select specific lines from the plan and send them directly with references like `@AUTHENTICATION_FLOW.md#L7-17`.
+My editor of choice is Neovim with the [claudecode.nvim plugin](https://github.com/coder/claudecode.nvim), which has been particularly helpful for maintaining focus. Instead of saying "implement phase 2", I can select specific lines from the plan and send them directly with references like `@SEARCH_FEATURE.md#L7-17`.
 
 This approach has helped me explore code more effectively. When I need to understand a particular section, I can select it and ask targeted questions about its behaviour or edge cases. Being able to provide precise context has made these conversations much more productive.
 
