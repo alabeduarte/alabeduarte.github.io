@@ -16,11 +16,11 @@ Working with large codebases presents a unique challenge: features rarely live i
 
 What I found that worked great was starting with a simple premise: I already understand the code I'm working with, but I want to validate that understanding and create a shared context with Claude Code.
 
-Here's an example of how this works. I start by describing what I know about how a feature works in my own words. I'm not asking Claude to explain the code to me, I'm explaining it myself and asking for validation. I'll typically mention an entry point where the logic begins, something like: "The authentication flow starts in `auth/middleware.go` and I believe it checks the JWT token, validates it against our auth service, and then either proceeds or redirects to login."
+Here's an example of how this works. I start by describing what I know about how a feature works in my own words. I'm not asking Claude to explain the code to me, I'm explaining it myself and asking for validation. I'll typically mention an entry point where the logic begins, something like: "The search feature starts in `search/handler.go` and I believe it parses the query, builds the database filters, executes the search, and returns paginated results."
 
 Claude Code then gives me its understanding based on the actual code. This is where the magic happens: it's not about getting an explanation, it's about calibrating our shared understanding. If there's a mismatch, I'll follow up with corrections or clarifications until we're aligned.
 
-Once I'm happy with our shared understanding, I ask Claude Code to write this down in a markdown file; let's call it `AUTHENTICATION_FLOW.md`. Now I have a structured, written form of how this particular feature works. Remember, I'm documenting a specific feature, not the entire codebase. This focused approach keeps things manageable and relevant.
+Once I'm happy with our shared understanding, I ask Claude Code to write this down in a markdown file; let's call it `SEARCH_FEATURE.md`. Now I have a structured, written form of how this particular feature works. Remember, I'm documenting a specific feature, not the entire codebase. This focused approach keeps things manageable and relevant.
 
 ## From Understanding to Planning
 
