@@ -1,6 +1,6 @@
 ---
 title: "Context Engineering: How I've Been Using Claude Code in My Development Workflow"
-date: "2025-01-13T12:00:00.000Z"
+date: "2025-09-13T09:31:28.041Z"
 description: "A practical method for maintaining context across sessions, validating understanding, and turning AI collaboration into well-documented, testable code."
 ---
 
@@ -61,7 +61,6 @@ This approach has helped me explore code more effectively. When I need to unders
 Most of the time, I prefer to handle the git workflow myself - staging files as chunks of work are completed so I know exactly what's being added. But I let Claude Code write the commit messages. It's genuinely excellent at understanding what was done and writing comprehensive commit messages that capture both the what and the why.
 
 This also helps with continuity. When I return to a feature hours later, instead of providing the entire plan again, I can just give Claude Code a couple of recent commits to read and it picks up right where we left off.
-
 
 ## Conclusion
 
