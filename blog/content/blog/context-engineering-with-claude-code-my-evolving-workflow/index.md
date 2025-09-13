@@ -42,9 +42,7 @@ Depending on the complexity, I'll either append to the existing markdown file or
 
 Here's a critical addition to my workflow that's saved me countless hours: I ask Claude Code to write tests first, then use them as validation checkpoints. Instead of me manually checking if the implementation works, Claude runs the tests to verify correctness.
 
-This TDD approach does consume roughly 2-3x more tokens due to iterative test-fail-implement-pass cycles and context accumulation. The [LLM4TDG framework research](https://cybersecurity.springeropen.com/articles/10.1186/s42400-024-00335-4) found that Test Driven Refactoring modules increased average token consumption by 181.21% and test case generation time by 207.36% compared to non-TDD approaches. [Scott Logic's analysis](https://blog.scottlogic.com/2023/12/18/implementing-cost-effective-test-driven-development-in-an-llm-application.html) found that TDD with LLMs involves multiple test runs and evaluation LLMs, effectively doubling token usage for testing purposes.
-
-But here's the thing: I'd write tests anyway, with or without AI. Tests are living documentation that verify the code works as intended. While code remains the source of truth, tests ensure that truth aligns with expectations. The token investment essentially automates what I'd do manually, with the added benefit of reduced debugging cycles and higher confidence in the implementation.
+This TDD approach does consume more tokens due to iterative test-fail-implement-pass cycles and context accumulation. But here's the thing: I'd write tests anyway, with or without AI. Tests are living documentation that verify the code works as intended. While code remains the source of truth, tests ensure that truth aligns with expectations. The token investment essentially automates what I'd do manually, with the added benefit of reduced debugging cycles and higher confidence in the implementation.
 
 This creates a powerful feedback loop. The tests become the specification, and Claude Code iterates on the implementation until they pass.
 

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn install)",
+      "Bash(yarn build)",
+      "WebSearch"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
