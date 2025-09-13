@@ -4,8 +4,6 @@ date: "2025-09-13T09:31:28.041Z"
 description: "A practical method for maintaining context across sessions, validating understanding, and turning AI collaboration into well-documented, testable code."
 ---
 
-# Context Engineering: How I've Been Using Claude Code in My Development Workflow
-
 Context engineering with AI assistants is evolving rapidly, and everyone seems to have their own approach. This article shares a workflow I've been experimenting with over a couple of months using Claude Code - a practical method for maintaining context across sessions, validating understanding, and turning AI collaboration into well-documented, testable code.
 
 There are heaps of excellent resources on context engineering out there - [Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices) from Anthropic, [Simon Willison's exploration of Claude Code](https://youtu.be/IS_y40zY-hc?si=tgSP87N5SYlrMDnD), and [Ethan Mollick's deep dive into working with AI tools](https://www.youtube.com/watch?v=fHWFF_pnqDk) to name a few. Every day brings new articles with tips and tricks for using AI assistants effectively - it can be overwhelming, even repetitive at times. Some are genuinely insightful, others feel like variations on the same theme. What I want to share here is something different: my personal journey over the last few months. Not another prescriptive guide, but the workflow that's actually stuck and made a tangible difference to how I write code.
