@@ -30,7 +30,7 @@ Now I can say: "Based on @AUTHENTICATION_FLOW.md, I want to add rate limiting pe
 
 But here's where I add my own thinking to the mix. I'll usually have ideas about implementation approaches, so I'll include them: "I thought about using Redis for rate limiting and I think the trade-off is additional infrastructure complexity but better performance at scale. Alternatively, I could use in-memory rate limiting which is simpler but won't work across multiple instances. I need you to weigh in on these approaches and come up with an implementation plan."
 
-I do this in plan mode (rotate shift + tab in Claude Code), which helps maintain focus on planning rather than jumping straight to implementation. The back-and-forth here is crucial, I challenge Claude Code with questions, explore edge cases, and refine until I'm confident we have not only a direction I'm happy with but also documented reasoning about alternatives considered. This becomes invaluable later when I need to write design documents or when revisiting decisions months down the track.
+I do this in plan mode (rotate shift + tab in Claude Code), which helps maintain focus on planning rather than jumping straight to implementation. The back-and-forth here is crucial, I challenge Claude Code with questions, explore edge cases, and refine until I'm confident we have not only a direction I'm happy with but also documented reasoning about alternatives considered.
 
 ### Iterative Planning and Documentation
 
