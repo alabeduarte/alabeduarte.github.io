@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Alabê's Blog]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 23 Sep 2025 05:35:10 GMT</lastBuildDate><item><title><![CDATA[Retrospectives - Roles and Expectations]]></title><description><![CDATA[In the team that I work with, we run retrospective
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[RSS Feed]]></title><description><![CDATA[This is where I'll share my thoughts]]></description><link>https://alabeduarte.com</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 23 Sep 2025 19:23:43 GMT</lastBuildDate><item><title><![CDATA[Context Engineering: How I've Been Using Claude Code in My Development Workflow]]></title><description><![CDATA[Context engineering with AI assistants is evolving rapidly, and everyone seems to have their own approach. This article shares a workflow I…]]></description><link>https://alabeduarte.com/context-engineering-with-claude-code-my-evolving-workflow/</link><guid isPermaLink="false">https://alabeduarte.com/context-engineering-with-claude-code-my-evolving-workflow/</guid><pubDate>Sat, 13 Sep 2025 09:31:28 GMT</pubDate><content:encoded>&lt;p&gt;Context engineering with AI assistants is evolving rapidly, and everyone seems to have their own approach. This article shares a workflow I’ve been experimenting with over a couple of months using Claude Code: a practical method for maintaining context across sessions, validating understanding, and turning AI collaboration into well-documented, testable code.&lt;/p&gt;
+&lt;p&gt;There are heaps of excellent resources on context engineering out there: &lt;a href=&quot;https://www.anthropic.com/engineering/claude-code-best-practices&quot;&gt;Claude Code Best Practices&lt;/a&gt; from Anthropic, &lt;a href=&quot;https://youtu.be/IS_y40zY-hc?si=tgSP87N5SYlrMDnD&quot;&gt;Simon Willison’s exploration of Claude Code&lt;/a&gt;, and &lt;a href=&quot;https://www.youtube.com/watch?v=fHWFF_pnqDk&quot;&gt;Ethan Mollick’s deep dive into working with AI tools&lt;/a&gt; to name a few. Every day brings new articles with tips and tricks for using AI assistants effectively, it can be overwhelming, even repetitive at times. Some are genuinely insightful, others feel like variations on the same theme. What I want to share here is something different: my personal journey over the last few months. Not another prescriptive guide, but the workflow that’s actually stuck and made a tangible difference to how I write code.&lt;/p&gt;
+&lt;p&gt;I won’t give you prescriptive prompts or a &lt;code class=&quot;language-text&quot;&gt;CLAUDE.md&lt;/code&gt; file to copy and paste. Instead, I want to explain the workflow and reasoning behind it, so you can adapt it to your own context.&lt;/p&gt;
+&lt;h2&gt;Building Context Through Dialogue&lt;/h2&gt;
+&lt;p&gt;Working with large codebases presents a unique challenge: features rarely live in isolation. They span multiple files, interact with various systems, and carry implicit knowledge that’s often scattered across team members’ heads and outdated documentation.&lt;/p&gt;
+&lt;p&gt;What I found that worked great was starting with a simple premise: I already understand the code I’m working with, but I want to validate that understanding and create a shared context with Claude Code.&lt;/p&gt;
+&lt;p&gt;Here’s an example of how this works. I start by describing what I know about how a feature works in my own words. I’m not asking Claude to explain the code to me, I’m explaining it myself and asking for validation. I’ll typically mention an entry point where the logic begins, something like: “The search feature starts in &lt;code class=&quot;language-text&quot;&gt;search/handler.go&lt;/code&gt; and I believe it parses the query, builds the database filters, executes the search, and returns paginated results.”&lt;/p&gt;
+&lt;p&gt;Claude Code then gives me its understanding based on the actual code. This is where the magic happens: it’s not about getting an explanation, it’s about calibrating our shared understanding. If there’s a mismatch, I’ll follow up with corrections or clarifications until we’re aligned.&lt;/p&gt;
+&lt;p&gt;Once I’m happy with our shared understanding, I ask Claude Code to write this down in a markdown file; let’s call it &lt;code class=&quot;language-text&quot;&gt;SEARCH_FEATURE.md&lt;/code&gt;. Now I have a structured, written form of how this particular feature works. Remember, I’m documenting a specific feature, not the entire codebase. This focused approach keeps things manageable and relevant.&lt;/p&gt;
+&lt;h2&gt;From Understanding to Planning&lt;/h2&gt;
+&lt;p&gt;With our context documented, I start fresh with a &lt;code class=&quot;language-text&quot;&gt;/clear&lt;/code&gt; command. This clean slate is intentional: it forces me to be explicit about what context is needed for the next phase.&lt;/p&gt;
+&lt;p&gt;Now I can say: “Based on @SEARCH_FEATURE.md, I want to add pagination to our search results that currently return everything.”&lt;/p&gt;
+&lt;p&gt;But here’s where I add my own thinking to the mix. I’ll usually have ideas about implementation approaches, so I’ll include them: “We could use offset-based pagination which is simple, or cursor-based pagination which handles data changes better. Offset is easier to implement and gives page numbers, but cursor pagination performs better with large datasets. What’s the right choice here?”&lt;/p&gt;
+&lt;p&gt;I do this in plan mode (rotate shift + tab in Claude Code), which helps maintain focus on planning rather than jumping straight to implementation. The back-and-forth here is crucial, I challenge Claude Code with questions, explore edge cases, and refine until I’m confident we have not only a direction I’m happy with but also documented reasoning about alternatives considered.&lt;/p&gt;
+&lt;h3&gt;Iterative Planning and Documentation&lt;/h3&gt;
+&lt;p&gt;Claude Code tends to create plans with multiple phases, and I often tweak these. Sometimes it over-engineers things, so I’ll consolidate or remove phases. This granular control helps break down complex problems into manageable chunks, and I can git commit after each successful phase implementation.&lt;/p&gt;
+&lt;p&gt;Depending on the complexity, I’ll either append to the existing markdown file or create a new one for the plan. The key is maintaining that written record of decisions and approach.&lt;/p&gt;
+&lt;h3&gt;Using Tests as Validation Checkpoints&lt;/h3&gt;
+&lt;p&gt;Here’s a critical addition to my workflow that’s saved me countless hours: I ask Claude Code to write tests first, then use them as validation checkpoints. Instead of me manually checking if the implementation works, Claude runs the tests to verify correctness.&lt;/p&gt;
+&lt;p&gt;This TDD approach does consume more tokens due to iterative test-fail-implement-pass cycles and context accumulation. But here’s the thing: I’d write tests anyway, with or without AI. Tests are living documentation that verify the code works as intended. While code remains the source of truth, tests ensure that truth aligns with expectations. The token investment essentially automates what I’d do manually, with the added benefit of reduced debugging cycles and higher confidence in the implementation.&lt;/p&gt;
+&lt;p&gt;This creates a powerful feedback loop. The tests become the specification, and Claude Code iterates on the implementation until they pass.&lt;/p&gt;
+&lt;h2&gt;Implementation with Precision&lt;/h2&gt;
+&lt;p&gt;Time for another &lt;code class=&quot;language-text&quot;&gt;/clear&lt;/code&gt;, starting fresh for the implementation phase. This separation between planning and implementation has been crucial for keeping the context manageable.&lt;/p&gt;
+&lt;p&gt;My editor of choice is Neovim with the &lt;a href=&quot;https://github.com/coder/claudecode.nvim&quot;&gt;claudecode.nvim plugin&lt;/a&gt;, which has been particularly helpful for maintaining focus. Instead of saying “implement phase 2”, I can select specific lines from the plan and send them directly with references like &lt;code class=&quot;language-text&quot;&gt;@SEARCH_FEATURE.md#L7-17&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This approach has helped me explore code more effectively. When I need to understand a particular section, I can select it and ask targeted questions about its behaviour or edge cases. Being able to provide precise context has made these conversations much more productive.&lt;/p&gt;
+&lt;p&gt;Most of the time, I prefer to handle the git workflow myself, staging files as chunks of work are completed so I know exactly what’s being added. But I let Claude Code write the commit messages. It’s genuinely excellent at understanding what was done and writing comprehensive commit messages that capture both the what and the why.&lt;/p&gt;
+&lt;p&gt;This also helps with continuity. When I return to a feature hours later, instead of providing the entire plan again, I can just give Claude Code a couple of recent commits to read and it picks up right where we left off.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;My development workflow is evolving, and I’m still figuring it out. The approach I’ve described here is what’s been working for me lately, but it’s constantly changing as I try to keep up with how quickly these tools are improving.&lt;/p&gt;
+&lt;p&gt;The biggest shift for me has been becoming more pragmatic. I still care deeply about clean APIs, good abstractions, and code that expresses clear intent, sometimes I find myself arguing with Claude about these things. But now that AI generates code for me, I’m learning to pick my battles. The craft still matters, but I’m less precious about being the one who types it all out.&lt;/p&gt;
+&lt;p&gt;Building context through documentation has become central to how I work, though I’m not committing these context files to git yet. These artifacts are still personal tools, they help me maintain continuity between sessions and occasionally help when explaining my thinking to teammates. But there’s a journey ahead in figuring out how this fits with how everyone else on the team works.&lt;/p&gt;
+&lt;p&gt;This way of working is still evolving. The tools keep changing, my approach keeps adapting, and I’m still discovering what works and what doesn’t. But for now, this structured context-building has shifted development from wrestling with complexity alone to having a conversation about solving problems, even if sometimes that conversation involves me shouting at Claude about proper error handling.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Retrospectives - Roles and Expectations]]></title><description><![CDATA[In the team that I work with, we run retrospective
 ceremonies
 every fortnight so that we can reflect on the work we’ve delivered by praising…]]></description><link>https://alabeduarte.com/retrospectives/roles-and-expectations/</link><guid isPermaLink="false">https://alabeduarte.com/retrospectives/roles-and-expectations/</guid><pubDate>Sat, 11 Dec 2021 03:04:14 GMT</pubDate><content:encoded>&lt;p&gt;In the team that I work with, we run &lt;a href=&quot;https://www.thoughtworks.com/en-au/insights/blog/5-things-you-need-know-facilitate-retrospective#:~:text=A%20Retrospective%20is%20a%20ceremony,evaluate%20its%20past%20working%20cycle.&amp;#x26;text=Finally%2C%20retrospective%20is%20a%20moment,improve%20things%20identified%20as%20negative.&quot;&gt;retrospective
 ceremonies&lt;/a&gt;
@@ -23,12 +54,12 @@ smile, sad and neutral faces, etc).&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 29.746835443037973%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA4UlEQVQY02VRuwrCQBDMl1jod9jYpBc/xcpOIR8gdlZaW4mKKCjYKNiJRoiFSIoIiYVg4ivJjsmdubym2tmb3Z3dkxCAwEFEccy4jyTC9xwyOUkIg2L2dN8Clw7wvjKB/9DgaS34txXn9plx7zrm+tBEoqmUckYOzGUVar+Ip6owwWtXhzEowV7XGLf3TRx7BRiTMvA1c5vEDf9D9I2CRVeGo48Yd40hzJmM96nNBdYU1ryCz6ERFH6Fy3TDyDpfik1O6ciO7xoGnhUEbqYu0VAk/05JfACJc/A7k9BSpi7CD7rvyeOa4J37AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 29.746835443037973%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAx0lEQVR42mP4jwX8I8T/9x8nYEDX9vfV1v9/7vX8///zFYT/9vj/X1fLgPQxMP/PuzP/f14p+f/7xQ6spjPADAML/3rx//FWp/+XF6j8/3lnBljm68n4/09XK/3/fjYVzP94KvP/lXky/1/v8QLyfkCd8Q+Hgf9//793qPH/kcUh/3+/OQURebL6/5u9AUB6DUTli3X/3+3z+P/n/lSsAcKAGYC/gP76jCb4GzVg/n0BBQahMIS69B/UtbCwAfH/ofHh8pixAwCkYso5NwQ5AQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;What worked, What we can keep doing and What didn&amp;#39;t work&quot;
-        title=&quot;What worked, What we can keep doing and What didn&amp;#39;t work&quot;
+        title=&quot;&quot;
         src=&quot;/static/306584caaf316dcb9d27df823366ec8a/f058b/3-faces.png&quot;
         srcset=&quot;/static/306584caaf316dcb9d27df823366ec8a/c26ae/3-faces.png 158w,
 /static/306584caaf316dcb9d27df823366ec8a/6bdcf/3-faces.png 315w,
@@ -38,6 +69,7 @@ smile, sad and neutral faces, etc).&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -55,9 +87,9 @@ experience should be and Software Developers/Engineers like myself.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Bullet point gathering from each participant and then, translated them into
 sticky notes trying to form a timeline from the &lt;strong&gt;Idea&lt;/strong&gt; to &lt;strong&gt;Working Software&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;Asked the participants to fill out the &lt;strong&gt;Roles and Expectations&lt;/strong&gt; matrix
-based on the bullet points above.&lt;/li&gt;
+&lt;li&gt;Asked the participants to fill out the &lt;strong&gt;Roles and Expectations&lt;/strong&gt; matrix&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;based on the bullet points above.&lt;/p&gt;
 &lt;h4&gt;First step: bullet points from Idea to Software lifecycle&lt;/h4&gt;
 &lt;p&gt;The first step was to gather bullet points from everyoneasking &lt;strong&gt;what are the
 steps to deliver a software, starting from the idea until the actual software in
@@ -79,12 +111,12 @@ steps provided by everyone in some sort of timeline.&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 28.48101265822785%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABN0lEQVQY03WRDUrDQBCFcy4P5S08hacQhPoHWotWaGmlamn6R9ym9CdNUpomTbK7+dymCgX1wYOd2TfD442FQVEUf5I9DXJVIPXhffjTRzp9VGusOI74hcMs021Oe+lxL1xa80XZ+977L6zh4NZsTkmiNyaDFNfJaQSCMJ4y9cdcd7v4yzveRRV7mRitT9rpIMOIndqySwTx6pytd2qMBFibKEDvtoTVBz5fW6zeLngSHa6cPn7wSL0xonc55/lFMB43Sewbso8KHWdEZTykUCsWwzOc5onxt8ba20yTHYu+wPdsolkD4QrqI5flwmYTTHD6Id32jGDUwqvVWPk9vHCGv45Yr2OklGiVlZFb+zC11iZ0RS4LMglKKROWMkJT58rklptYVXmcfK81fSWVoSTL0p/blfgCvvTHaJd5fu0AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 28.48101265822785%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABOUlEQVR42l2R207CQBCG+3a+kBc+hq/ihRdEiRptVIQEIkIKkR44GOiJAm1pd9vPbRE0TjKbf2b/THa/0fgTZfmTh4qjymWJLMqj69d4qgt1FrXWkiTmfxy91iam63rcWlM+XL/uFadBf0OqzGql2eaTGhATb/s4hmA+29PybaJkjrma0Bz2WXs39CydiZ9S5iuy3jtim5CKiH3iELuXxP6FGhejbeMIuQkJHu6xeh2CwRV3zkClges/8vxiYlwv0VsWjtkmMRrkgwZvpknTHqvv+MyH50y7ZxUctOqZ6S5lObIJvCHbrw7mdMbrZIa/MtiECz6HIUZvQThu4+o63nqEGy4J1juiaIeUGYXcHxjWXIoCUUpyUaoFKCJSKs4SUdVCqnuh2Ml6OUJ5peoXqi+lIM+z0/Iqht8hV8fOyZtiSAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;From Idea to Software lifecycle&quot;
-        title=&quot;From Idea to Software lifecycle&quot;
+        title=&quot;&quot;
         src=&quot;/static/60a56c968bddc261b2f8521a3c83d421/f058b/retro-step-1.png&quot;
         srcset=&quot;/static/60a56c968bddc261b2f8521a3c83d421/c26ae/retro-step-1.png 158w,
 /static/60a56c968bddc261b2f8521a3c83d421/6bdcf/retro-step-1.png 315w,
@@ -94,6 +126,7 @@ steps provided by everyone in some sort of timeline.&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -124,12 +157,12 @@ activities to run in your team, please check them out!&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 68.9873417721519%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAACTElEQVQ4y3VUa2/UMBDM//8zSKjwBYFUUVR6pdAW0StwR653eVzixEkcOy8nGdZODtoerLSy49iTmdl1HMwxjuPfcZ4/jqZpbNo9z96N8zmTzmFySBOaMm8Vykag6iq7JqVEVU3zQZbohYDOMvR5jlHrAys4z5n0/YDEv0PgLXHvB/BYBKUk4jhCsI+wCTlYzJAzBh6GyOIYWZIgJ+C+7+GUZUmbY5uGhQXdvEbjn+OlG8HNxSy5gs8EXtzkKOoB/4snkodhgKQPCFWgrBQSXqCg57ZtkfEMuchR6walVMS6shYcUimFuq4nwK7rLJixUGs6HH5A/LDE4q0ACyX6obNgmysP0Q3Dq9sQZ8sIHbE2CstSQpCnBtQxQEZuFEUYyAMT5eIrkrNT+NsFHZoq23YN2IpDbWm/8BCyL/+W/KT8RDFJEzy4W8o1GPuBJInAOYfnEUi8B5cBUlrnyRZpmtp3GaUZDVvHyDUVyqgFKvLAxGm0wmW8RFV8Iv9iu6bI00ooyPU7qOxuZnBcHEdTDxlk40HTTIB5LZDyc/S1S4cmGyQVQRD79uICOuUYpraz3j/Ooz4siG3MErj+Dsudj+9eSPI8POw22C7vEV9egVMf8jTEPjSWMCs9mXvRMc1o2sIw7eaO3wqJEzfEm80eH4OQmN4iLwPk65/Q70+w2EU491fQ6ppY9k8lGzDGpq+Y0RRGDyNYdg1RrPD5tELgSvJQguc+Wv0NvzKOTS7tLX5+dY8k//lJ9HSVdImCD2gqs3mwV2sc9KO9x23zG7ZBNNqAQEDdAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 68.9873417721519%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSUlEQVR42n1T207bQBD1/39IX1qpfWofUKVKCBVEqxBEAyUQbEi8vuz6tr57N6czG0A0jbrS2OvxeuacOcceDqztdvtPrm1bGGMOvuPcS957eXibnKxBNdTQg0Y/9S6X5zmmaaKvLWxTw9Y1TFXBag1Y+1rc2+/GH6noDmuxwioSiFTi0AkhILMcIs2RpymKJEFOuSKOUSiFiopvqbDHGykl0jRB3/cOwXT7Dk10gff3Mdaldo1qXVIDjQ+zjFDvEPF1u0/ZUlWeDSPje01U6qZC0zaI8wK6aTCNIzJC0fQddD+4xsMwuOA9R9d1GOmco2zfzKDvG6j4GML3MTumfarpYI+EGKznEcR1ik+zELOVQt/WKMvS0S2Kwo3GY1RRFBHldEeDBTk5h/xxgnUwxzgYl9e1hrqpUD8Z+PIesVo8K/y3Bt5bm3DxhIa9Xj5i49/SbG8glUSWZQiCAGkmoSqBXC6RyQcolbl37AC+O4TMW5P0HCPNxBD9L5sFFtkDumpGI1CuGVMbmhalf4S2ut+hswb7tvN4oMyfw6lMK64VVH4CM/h0aNoVpIY9jWU8/U7+K3GQ774PWZyC4Eup8Bj6uAsjBCIhegIrfwVxu0R8cYmS/JgrgSQOiLZywdZjlk6U13hW+3dW4uNyg6MgwiyNMDU/kRYhmpsrtN8+4zTMcCmuMdZz2D2UHg+SFebgLrw6mmsoz1FWG5x9JesIskWZkz+f0PVX+JWSSGXlrH1Q5QN/O+yUkNlrpKEhv20JvYE1Ewkx4H/rD9CbNWk9IAcNAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Roles and Expectations matrix&quot;
-        title=&quot;Roles and Expectations matrix&quot;
+        title=&quot;&quot;
         src=&quot;/static/3997d19675b69a172f0bb1d398340c7f/f058b/retro-step-2.png&quot;
         srcset=&quot;/static/3997d19675b69a172f0bb1d398340c7f/c26ae/retro-step-2.png 158w,
 /static/3997d19675b69a172f0bb1d398340c7f/6bdcf/retro-step-2.png 315w,
@@ -139,6 +172,7 @@ activities to run in your team, please check them out!&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -180,6 +214,644 @@ Ceremony&lt;/a&gt;&lt;/li&gt;
 Matrix&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.funretrospectives.com/is-is-not-does-does-not/&quot;&gt;Is - Is not - Does - Does
 not&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Test-Driven Algorithms - Sorting]]></title><description><![CDATA[Sorting algorithms are heavily used in Software Development in one way or
+another. Depending on the language, you might have in handy some…]]></description><link>https://alabeduarte.com/test-driven-algorithms/sorting/</link><guid isPermaLink="false">https://alabeduarte.com/test-driven-algorithms/sorting/</guid><pubDate>Thu, 10 Jun 2021 06:58:04 GMT</pubDate><content:encoded>&lt;p&gt;Sorting algorithms are heavily used in Software Development in one way or
+another. Depending on the language, you might have in handy some sorting
+functions at your disposal but depending on the use case, knowing which sorting
+algorithm is being applied under the hood can be key to measure the impacts of
+the change on the working Software.&lt;/p&gt;
+&lt;p&gt;In this article, I’d like to explore a couple of implementations of sorting
+algorithms but I’d like to do so driven by unit tests. I haven’t seen much
+content online that explore this approach so I hope this sparks your interest.&lt;/p&gt;
+&lt;h2&gt;A recap on what Sorting Algorithms are&lt;/h2&gt;
+&lt;p&gt;Most of the sorting algorithms definitions I’ll be using were extracted from the
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Sorting_algorithm&quot;&gt;Wikipedia&lt;/a&gt; so here’s a summary
+to kick us off:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A sorting algorithm is an algorithm that puts elements of a list in a certain
+order.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;borrowed from Wikipedia&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-resp-iframe-wrapper&quot; style=&quot;padding-bottom: 78.33333333333333%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem&quot; &gt; &lt;iframe src=&quot;https://giphy.com/embed/ezjd4NlY4w3io&quot; frameborder=&quot;0&quot; class=&quot;giphy-embed&quot; allowfullscreen=&quot;&quot; style=&quot; position: absolute; top: 0; left: 0; width: 100%; height: 100%; &quot;&gt; &lt;p&gt;&lt;a href=&quot;https://giphy.com/gifs/algorithm-ezjd4NlY4w3io&quot;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;&lt;/iframe&gt; &lt;/div&gt;
+&lt;h2&gt;How we will approach this&lt;/h2&gt;
+&lt;p&gt;The idea here is to implement one or two sorting algorithms but doing so driven
+by tests. Basically, we’ll write a single test first, with a simple scenario
+with input and expected output. This will fail because there won’t be any
+code just yet. Then we will write the minimum necessary code to satisfy the
+test and repeat the process. The name of this technique is Test-Driven
+Development (TDD). If you’re curious about this process or if it doesn’t sound
+familiar to you, please visit &lt;a href=&quot;/tdd&quot;&gt;this post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The language I’ll use will be &lt;a href=&quot;https://golang.org/&quot;&gt;Go&lt;/a&gt; and using a single file
+with &lt;strong&gt;both test and implementation&lt;/strong&gt; for simplicity.&lt;/p&gt;
+&lt;p&gt;If you are not familiar with the Go language, don’t worry. I will post different
+snippets of code to illustrate every step as we were scrolling up and down in a
+file. The idea here is to explore the technique, not the syntax or peculiarities
+of Go.&lt;/p&gt;
+&lt;p&gt;You might notice that I’ll be using the term
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Array_data_structure&quot;&gt;Array&lt;/a&gt; although in Go there
+is a difference between &lt;a href=&quot;https://blog.golang.org/slices-intro&quot;&gt;Arrays and
+Slices&lt;/a&gt; and, technically, I’ll be using
+Slices during the code.&lt;/p&gt;
+&lt;p&gt;I’ll also try to describe each step, so pretend we’re doing some &lt;a href=&quot;https://martinfowler.com/articles/on-pair-programming.html&quot;&gt;Pair
+Programming&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Let’s kick it off&lt;/h2&gt;
+&lt;p&gt;All right. As I mentioned below, I’d like to start with a simple test that would
+force me to add the least amount of code just to get things working, then we can
+add more to it. In terms of which algorithm I intend to chose, I’ll go with
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Bubble_sort&quot;&gt;Bubble sort&lt;/a&gt;. Then we evaluate if
+this is good enough for us, if not, we refactor our code to choose a different
+implementation. The important thing here is: at the end, regardless of the
+algorithm we choose, the tests need to pass as we’ll still want to sort our
+elements.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also, for simplicity, our sorting algorithm will only be going to handle numbers
+(integers to be more precise).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Let’s start with the simplest input possible, which would be an empty array. Why?
+Because if we want to sort an empty array, the result should be an empty array!
+The approach I’d like to follow is to get things going with &lt;strong&gt;minimal moves as
+possible&lt;/strong&gt; because we need constant feedback. We could start with an array with
+4 elements and write a test which would expect this array to be sorted, but this
+would require us spending more time writing code, less time writing test. I’d
+like to get some balance and make sure we don’t leave any edge case behind.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; sorting_test
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;testing&quot;&lt;/span&gt;
+
+	&lt;span class=&quot;token string&quot;&gt;&quot;github.com/matryer/is&quot;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;TestSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return same value when array is empty&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+		elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+		expected &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; expected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Running the test above with &lt;code class=&quot;language-text&quot;&gt;go test&lt;/code&gt;, it will fail:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+2021/06/08 14:06:17 exit status 2
+# alabeduarte.com_test [alabeduarte.com.test]
+./sorting_test.go:15:12: undefined: Sort
+FAIL    alabeduarte.com [build failed]
+FAIL
+FAIL (0.22 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is because &lt;code class=&quot;language-text&quot;&gt;Sort&lt;/code&gt; method is not defined anywhere. Let’s make the
+minimal effort to get this passing than by defining the method and make it
+return an empty array so our test will pass!&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Implementation file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;_elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note that we’re always returning an empty array, no matter what&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Running the tests:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+ok      alabeduarte.com 0.940s
+PASS (0.39 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let’s add another test scenario where it will force us to write something
+other than hardcoded response:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;TestSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// previous test scenario is omitted here ...&lt;/span&gt;
+
+  t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return same value when array has only one element&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    expected &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; expected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+2021/06/08 14:04:49 exit status 1
+        sorting_test.go:29: [] != [1]
+--- FAIL: TestSort (0.00s)
+    --- FAIL: TestSort/should_return_same_value_when_array_has_only_one_element (0.00s)
+FAIL
+FAIL    alabeduarte.com 0.101s
+FAIL
+FAIL (0.31 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is expected since our implementation code is always returning an empty
+array. Let’s change that and make the test pass, but in a way that would require
+the minimal effort possible to achieve that:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Implementation file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note that returning the elements themselves satisfies both scenarios we have so far&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+ok      alabeduarte.com 0.766s
+PASS (0.39 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now that our two scenarios are passing, let’s evaluate our code so far…&lt;/p&gt;
+&lt;p&gt;Ok, looking at the code, there’s no much I can think of to improve, except for
+the fact that our tests are a bit verbose at the moment. We’re defining
+variables &lt;code class=&quot;language-text&quot;&gt;elements&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;expected&lt;/code&gt; in our tests, then we’re doing the following
+evaluation:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; expected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Considering how simple our test is at the moment, I feel we could do things
+inline, so let’s refactor it:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;TestSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return same value when array is empty&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return same value when array has only one element&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, running the tests, they still should be passing, since we didn’t add
+anything new:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+ok      alabeduarte.com (cached)
+PASS (0.24 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Good. Now everything is “green” (a.k.a passing), let’s add a new scenario that
+would actually require us to apply any sort of algorithm. However, let’s add
+something really simple, like 2 numbers:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;TestSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return the lowest element followed by the largest element&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As expected, the test should fail:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+2021/06/08 14:21:11 exit status 1
+        sorting_test.go:31: [2 1] != [1 2]
+--- FAIL: TestSort (0.00s)
+    --- FAIL: TestSort/should_return_the_lowest_element_followed_by_the_largest_element (0.00s)
+FAIL
+FAIL    alabeduarte.com 0.098s
+FAIL
+FAIL (0.34 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, let’s make it pass!&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Implementation file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+ok      alabeduarte.com 0.759s
+PASS (0.37 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That’s great! The tests are all passing. You might be wondering… our
+implementation doesn’t sound very reliable isn’t it? A few things can go wrong
+there… also, it feels like we’re cheating because we’re always grabbing the
+first and second element and returning them into the reverse order, there’s no
+sorting going on, to be honest. Let’s break the code down and discuss it further
+what we can do next:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Implementation file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// here we are checking if the length is less or equal to 1&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// which means that if the array is empty we will return the elements&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// themselves (an empty array) and if the array has only one element, it will&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// also return itself.&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// On this case, we&apos;re grabbing the second elemnt and the first element and&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// swapping the order of the two&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Basically, if the array has more than 2 elements, our code will only return the
+first two with reverse order. So here are a few things that can go wrong with
+this algorithm:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When the elements’ length is greater than 2, our sorting algorithm will ignore
+the rest, returning an array with fewer elements&lt;/li&gt;
+&lt;li&gt;When the elements are already sorted, our sorting algorithm will mess it up by
+swapping the first two elements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Should we fix them? &lt;strong&gt;Yes, but we should do so only we have tests.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It is pretty clear that our code is doing the wrong thing. But as tempting as it
+might sound, let’s only add a new code into our implementation if we have a test
+scenario that would &lt;strong&gt;justify&lt;/strong&gt; its existence!&lt;/p&gt;
+&lt;p&gt;So let’s start with the following test scenario:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;TestSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return an array with the same length as the one provided as an input&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		sortedElements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+		actualLength &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sortedElements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;actualLength&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As expected, the tests will fail:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+2021/06/08 14:40:57 exit status 1
+        sorting_test.go:44: 2 != 4
+--- FAIL: TestSort (0.00s)
+    --- FAIL: TestSort/should_return_an_array_with_the_same_length_as_the_one_provided_as_an_input (0.00s)
+FAIL
+FAIL    alabeduarte.com 0.101s
+FAIL
+FAIL (0.34 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let’s make it pass:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Implementation file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// take the elements from index 2 onward&lt;/span&gt;
+	rest &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// append the rest to the original array we had&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; rest&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The tests are passing:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+ok      alabeduarte.com 0.801s
+PASS (0.47 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Since we are making sure the array length will always be the same but we’re
+still compliant with the other test scenarios. However, the implementation now
+is a bit clunky and this is a sign that it is time to actually implement the
+algorithm!&lt;/p&gt;
+&lt;p&gt;Let’s add a scenario that is simple enough to illustrate that we can sort more
+than 2 elements without having a clunky implementation. So let’s use 3 elements
+this time:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;TestSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should sort all the elements from the lowest to the largest&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And it should fail, of course:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+2021/06/08 14:56:24 exit status 1
+        sorting_test.go:51: [3 2 1] != [1 2 3]
+--- FAIL: TestSort (0.00s)
+    --- FAIL: TestSort/should_sort_all_the_elements_from_the_lowest_to_the_largest (0.00s)
+FAIL
+FAIL    alabeduarte.com 0.099s
+FAIL
+FAIL (0.40 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let’s implement some sorting algorithm here. For now, let’s use the
+the algorithm called &lt;a href=&quot;https://en.wikipedia.org/wiki/Bubble_sort&quot;&gt;Bubble Sort&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As stated on Wikipedia, bubble sort is one of the simplest sorting algorithms to
+understand and implement, but its efficiency decreases dramatically on larger
+lists. More details &lt;a href=&quot;https://en.wikipedia.org/wiki/Bubble_sort#Use&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;If you want to know more about the implementation of this algorithm in Go, I
+also suggest this material:
+&lt;a href=&quot;https://tutorialedge.net/courses/go-algorithms-course/21-bubble-sort-in-go/&quot;&gt;https://tutorialedge.net/courses/go-algorithms-course/21-bubble-sort-in-go/&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Implementation file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	n &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; n &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	swapped &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; swapped &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		swapped &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;
+
+		&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; n&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+				swapped &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the implementation above, all the tests should pass:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test ./.
+ok      alabeduarte.com 0.858s
+PASS (0.51 seconds)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Efficiency&lt;/h2&gt;
+&lt;p&gt;Our algorithm (bubble sort) is not the most efficient out there. The complexity
+of the algorithm is &lt;em&gt;O(n²)&lt;/em&gt;, where &lt;em&gt;n&lt;/em&gt; is the number of elements being sorted.
+This means that its efficiency decreases as the number of elements grow. There
+are other options we can use here such as &lt;a href=&quot;https://en.wikipedia.org/wiki/Insertion_sort&quot;&gt;insertion
+sort&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/Selection_sort&quot;&gt;selection
+sort&lt;/a&gt; that are considered my
+efficient.&lt;/p&gt;
+&lt;p&gt;Without necessarily changing anything, let’s do a benchmark with our current
+algorithm using &lt;a href=&quot;https://golang.org/pkg/testing/#hdr-Benchmarks&quot;&gt;Go testing benchmarks&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First, let’s create a small function (within our test file) to generate random
+elements with a given length:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;generateRandomElements&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token comment&quot;&gt;// initialise a slice with length and capacity of &quot;n&quot;&lt;/span&gt;
+	elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; n&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; n&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	&lt;span class=&quot;token comment&quot;&gt;// populate the slice with random elements&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;range&lt;/span&gt; elements &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; rand&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let’s create a function that will iterate over our method Sort taking the
+&lt;code class=&quot;language-text&quot;&gt;testing.B&lt;/code&gt; as a parameter:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;N&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;generateRandomElements&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// sort elements&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, let’s create some benchmark functions to test the efficiency of our
+code:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Test file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort100000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When running the following command:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ go test -bench=.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here’s the result:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test -bench=.
+goos: darwin
+goarch: amd64
+pkg: alabeduarte.com
+cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+BenchmarkBubbleSort3-12                 17688249                67.22 ns/op
+BenchmarkBubbleSort10-12                 4173184               303.4 ns/op
+BenchmarkBubbleSort20-12                 1228124              1031 ns/op
+BenchmarkBubbleSort50-12                  240789              4240 ns/op
+BenchmarkBubbleSort100-12                  90360             13976 ns/op
+BenchmarkBubbleSort1000-12                  1626            733388 ns/op
+BenchmarkBubbleSort100000-12                   1        14456783580 ns/op&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, when having 100,000 elements in the array, my machine took
+&lt;code class=&quot;language-text&quot;&gt;14456783580&lt;/code&gt; nanoseconds to perform the sorting, which was equivalent to about
+14 seconds.&lt;/p&gt;
+&lt;p&gt;Let’s try the same using the &lt;a href=&quot;https://golang.org/pkg/sort/&quot;&gt;Go’s standard
+library&lt;/a&gt; implementation to sort our elements.
+Let’s create a small function that will generate random elements and call the
+method &lt;a href=&quot;https://golang.org/pkg/sort/#Ints&quot;&gt;Ints&lt;/a&gt; from the package
+&lt;a href=&quot;https://golang.org/pkg/sort&quot;&gt;sort&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;N&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;generateRandomElements&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		&lt;span class=&quot;token comment&quot;&gt;// sort elements&lt;/span&gt;
+		sort&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Ints&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let’s create similar benchmark functions that will compare our &lt;code class=&quot;language-text&quot;&gt;Sort&lt;/code&gt;
+functin against &lt;a href=&quot;https://golang.org/pkg/sort/#Ints&quot;&gt;sort.Ints&lt;/a&gt; function:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort100000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let’s run the benchmark:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test -bench=.
+goos: darwin
+goarch: amd64
+pkg: alabeduarte.com
+cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+BenchmarkBubbleSort3-12                 18284776                67.53 ns/op
+BenchmarkBubbleSort10-12                 4207515               295.9 ns/op
+BenchmarkBubbleSort20-12                 1201567              1006 ns/op
+BenchmarkBubbleSort50-12                  276207              4262 ns/op
+BenchmarkBubbleSort100-12                  89107             13813 ns/op
+BenchmarkBubbleSort1000-12                  1620            755969 ns/op
+BenchmarkBubbleSort100000-12                   1        14532398965 ns/op
+
+BenchmarkGoSort3-12                      9781417               124.5 ns/op
+BenchmarkGoSort10-12                     2595421               439.4 ns/op
+BenchmarkGoSort20-12                     1000000              1108 ns/op
+BenchmarkGoSort50-12                      357010              3252 ns/op
+BenchmarkGoSort100-12                     160202              7618 ns/op
+BenchmarkGoSort1000-12                     10000            100856 ns/op
+BenchmarkGoSort100000-12                      75          16205598 ns/op&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As we can see, our algorithm using bubble sort seems a little better until 20
+elements, where go standard library start to shine being way faster than ours.&lt;/p&gt;
+&lt;p&gt;Since the go standard library is more efficient, let’s change our implementation
+to use that instead and re-run the tests:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Implementation file&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	sort&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Ints&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All tests should still be passing:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;go test -v
+=== RUN   TestSort
+=== RUN   TestSort/should_return_same_value_when_array_is_empty
+=== RUN   TestSort/should_return_same_value_when_array_has_only_one_element
+=== RUN   TestSort/should_return_the_lowest_element_followed_by_the_largest_element
+=== RUN   TestSort/should_return_an_array_with_the_same_length_as_the_one_provided_as_an_input
+=== RUN   TestSort/should_sort_all_the_elements_from_the_lowest_to_the_largest
+--- PASS: TestSort (0.00s)
+    --- PASS: TestSort/should_return_same_value_when_array_is_empty (0.00s)
+    --- PASS: TestSort/should_return_same_value_when_array_has_only_one_element (0.00s)
+    --- PASS: TestSort/should_return_the_lowest_element_followed_by_the_largest_element (0.00s)
+    --- PASS: TestSort/should_return_an_array_with_the_same_length_as_the_one_provided_as_an_input (0.00s)
+    --- PASS: TestSort/should_sort_all_the_elements_from_the_lowest_to_the_largest (0.00s)
+PASS
+ok      alabeduarte.com 0.920s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you are interested to see the entire code we’ve built, please uncollapse the
+section below:&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;(click to expand)&lt;/summary&gt;
+&lt;p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; sorting_test
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;math/rand&quot;&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;sort&quot;&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;testing&quot;&lt;/span&gt;
+
+	&lt;span class=&quot;token string&quot;&gt;&quot;github.com/matryer/is&quot;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Implementation:&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// Sort will receive a slice as an input and it will return another slice but&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// sorted.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	n &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; n &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	swapped &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; swapped &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		swapped &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;
+
+		&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; n&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+				elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+				swapped &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Unit tests:&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;TestSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return same value when array is empty&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return same value when array has only one element&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return the lowest element followed by the largest element&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should return an array with the same length as the one provided as an input&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		sortedElements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+		actualLength &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sortedElements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;actualLength&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;should sort all the elements from the lowest to the largest&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;T&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		is &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;New&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		is&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Benchmarks:&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;generateRandomElements&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token comment&quot;&gt;// initialise a slice with length and capacity of &quot;n&quot;&lt;/span&gt;
+	elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; n&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; n&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+	&lt;span class=&quot;token comment&quot;&gt;// populate the slice with random elements&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;range&lt;/span&gt; elements &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		elements&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; rand&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elements
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;N&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;generateRandomElements&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		&lt;span class=&quot;token comment&quot;&gt;// sort elements&lt;/span&gt;
+		&lt;span class=&quot;token function&quot;&gt;Sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;N&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		elements &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;generateRandomElements&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;n&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+		&lt;span class=&quot;token comment&quot;&gt;// sort elements&lt;/span&gt;
+		sort&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Ints&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkBubbleSort100000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkBubbleSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkGoSort100000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;benchmarkGoSort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100_000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;h2&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;If you read the article and came this far, thank you very much. I hope I was
+able illustrate how would be like to develop a sorting algorithm driven by
+tests.&lt;/p&gt;
+&lt;p&gt;You might have noticed that I wasn’t too concerned about picking up the most
+performing algorithm implementation, to begin with, but rather, I was interested
+to go through the journey of having written &lt;strong&gt;code guided by tests&lt;/strong&gt;. In other
+words, &lt;strong&gt;my intention was to have tests that would justify the existence of any
+kind of implementation and avoid adding any extra code if there is no test for
+it&lt;/strong&gt; and I hope I could make it clear and enjoyable.&lt;/p&gt;
+&lt;h3&gt;Thank you for reading&lt;/h3&gt;
+&lt;p&gt;I hope you enjoy this post, if you have any feedback or questions, hit me up on
+&lt;a href=&quot;mailto:alabeduarte@gmail.com&quot;&gt;alabeduarte@gmail.com&lt;/a&gt;, I’d be happy to hear your thoughts and be better next
+time!&lt;/p&gt;
+&lt;h3&gt;Other References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Test-Driven-Development-Kent-Beck/dp/0321146530&quot;&gt;Test-Driven Development by
+Example by Kent Beck&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com.au/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627&quot;&gt;Growing Object-Oriented Software, Guided by
+Tests by Nat Pryce&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Test-Driven-Development-Teste-Design-Portuguese-ebook/dp/B00WKMN24W&quot;&gt;Test-Driven Development: Teste e Design no Mundo Real (Portuguese
+Edition) by Mauricio Aniche&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://alabeduarte.com/tdd/&quot;&gt;TDD (Test-Driven Development) - My personal
+journey&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[The semantics of Marshalling in Go]]></title><description><![CDATA[In this post, I’d like to discuss how Marshalling/Unmarshalling process is
 usually applied in Go programs. I’ll give some examples
 of how it…]]></description><link>https://alabeduarte.com/the-semantics-of-marshalling-in-go/</link><guid isPermaLink="false">https://alabeduarte.com/the-semantics-of-marshalling-in-go/</guid><pubDate>Fri, 26 Mar 2021 10:38:35 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’d like to discuss how Marshalling/Unmarshalling process is
@@ -240,7 +912,7 @@ JSON structure into Go code (&lt;em&gt;in other words, JSON “parsing”&lt;/em
 &lt;p&gt;There is a quite popular term that can be seen as &lt;em&gt;similar&lt;/em&gt;, but don’t assume
 that just yet, which is &lt;a href=&quot;https://en.wikipedia.org/wiki/Parsing&quot;&gt;parsing&lt;/a&gt;. I
 would say that the &lt;strong&gt;semantics of parsing&lt;/strong&gt; is more applicable when the data to
-be processed are &lt;strong&gt;&lt;em&gt;strings/symbols&lt;/em&gt;&lt;/strong&gt; that will then be transformed into a
+be processed are &lt;em&gt;&lt;strong&gt;strings/symbols&lt;/strong&gt;&lt;/em&gt; that will then be transformed into a
 custom representation throughout the programming language in question.&lt;/p&gt;
 &lt;p&gt;While terms like Marshalling and Encoding offer a bit more scope to work with.
 Given you need to transform &lt;em&gt;type A&lt;/em&gt; to &lt;em&gt;type B&lt;/em&gt; while &lt;em&gt;type A&lt;/em&gt; is a &lt;strong&gt;binary&lt;/strong&gt;,
@@ -512,12 +1184,12 @@ the avatar.&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 41.139240506329116%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABDUlEQVQoz52QC2uEMBCE/f//7igH0tP6fp49PU0Meeg0G09pr7SFBoZdluTbyXjrukIbBbPoTUZDKfUvEcvTFnBtRrQVR1MyvLccWmssy2LhxvUkekCVZtRLKb9UIYTrPbMopAFH+GKsFPLAgHGGvu/BOXeX6DItoJ7ZGTl5PrToAGYhQ3TWeDsrFKHGrb8hSVIURYGqquD7PhibME4TkjRzC+gQeIeT+wOYXCYEJ43LSSJ9pTwk4jhGWZboug5RFFkgw/0+IssLSPvFX4AaVTYhDyWyQKDJtoDrunaAYRicU3JF8/bauYc/ArfA5SOJ9aG/zw777tCGSeGTAzGLrVrN83zUvf88fxbNifUBU+Ns/pnmDuUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 41.139240506329116%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABBElEQVR42qWRiWrDMBBE/f9/VxJK6yN2YpnWh4IvybauqVbBbQg0ULrw2PEijUZyBF/WGjjYG87AGAOtdeh/wTmHiMy6dkD7KT0CvBHYtu3bdDdWSgWM0aHTmh36XpYl6MjBoMpnZAeD7KhwedeQcsE0TWERQXpPIaQM/bFo9mN4nnE6ahSvCmVicOVXFEUBxhjqukYcxxiGAfMskBdnCCGfG7J8QvqikR42FG90HeUNc5RliaZpkCQpxnGE9GlLVoWNTw3ragLLFNhpw8dFhXfjnKPv+3Dlrut8KhEOajuOdV1/N7TWhk30h0gTpB/rfkb6HioKcUvoB9I/NJ36HygUmX4Br31t8f9CExwAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;User Card&quot;
-        title=&quot;User Card&quot;
+        title=&quot;&quot;
         src=&quot;/static/2929574b839204879d75b55434212841/f058b/user-card.png&quot;
         srcset=&quot;/static/2929574b839204879d75b55434212841/c26ae/user-card.png 158w,
 /static/2929574b839204879d75b55434212841/6bdcf/user-card.png 315w,
@@ -528,6 +1200,7 @@ the avatar.&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -595,12 +1268,12 @@ the avatar.&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 41.139240506329116%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABDUlEQVQoz52QC2uEMBCE/f//7igH0tP6fp49PU0Meeg0G09pr7SFBoZdluTbyXjrukIbBbPoTUZDKfUvEcvTFnBtRrQVR1MyvLccWmssy2LhxvUkekCVZtRLKb9UIYTrPbMopAFH+GKsFPLAgHGGvu/BOXeX6DItoJ7ZGTl5PrToAGYhQ3TWeDsrFKHGrb8hSVIURYGqquD7PhibME4TkjRzC+gQeIeT+wOYXCYEJ43LSSJ9pTwk4jhGWZboug5RFFkgw/0+IssLSPvFX4AaVTYhDyWyQKDJtoDrunaAYRicU3JF8/bauYc/ArfA5SOJ9aG/zw777tCGSeGTAzGLrVrN83zUvf88fxbNifUBU+Ns/pnmDuUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 41.139240506329116%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABBElEQVR42qWRiWrDMBBE/f9/VxJK6yN2YpnWh4IvybauqVbBbQg0ULrw2PEijUZyBF/WGjjYG87AGAOtdeh/wTmHiMy6dkD7KT0CvBHYtu3bdDdWSgWM0aHTmh36XpYl6MjBoMpnZAeD7KhwedeQcsE0TWERQXpPIaQM/bFo9mN4nnE6ahSvCmVicOVXFEUBxhjqukYcxxiGAfMskBdnCCGfG7J8QvqikR42FG90HeUNc5RliaZpkCQpxnGE9GlLVoWNTw3ragLLFNhpw8dFhXfjnKPv+3Dlrut8KhEOajuOdV1/N7TWhk30h0gTpB/rfkb6HioKcUvoB9I/NJ36HygUmX4Br31t8f9CExwAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Account Card&quot;
-        title=&quot;Account Card&quot;
+        title=&quot;&quot;
         src=&quot;/static/2929574b839204879d75b55434212841/f058b/user-card.png&quot;
         srcset=&quot;/static/2929574b839204879d75b55434212841/c26ae/user-card.png 158w,
 /static/2929574b839204879d75b55434212841/6bdcf/user-card.png 315w,
@@ -611,6 +1284,7 @@ the avatar.&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/td&gt;
@@ -627,12 +1301,12 @@ the avatar.&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 42.405063291139236%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABUElEQVQoz4VSy1LDMAzsn/MZHPgOTgx8ACegHdKWPknSJqHJJLHT+JlFttvC9ACe0UhjyeuVViNjDLRRsFbDODMaSilIKb2/jv8yay1Gfd8j3TZINx2SNcdX1lHCwB1XMAyDN/fAfX6OL5+cvMMRQmDkEqv3DquJwcerQhFb1HWFNE3BWoayLFEUhQfvjkccysoDXx9357AIUGA97bB511iMJYpEo20bLJcrD5ZlGcVLX1w31MluT4z0BWhQHbWiaWwEGBgKLCYMizeF+YvEfqvBOcNsOkOe50iSBFEU+eLDocRnnEDrAKjyMWR0Bx0/0t2FIbHa9cRMIY8lmsoQA0ksW//QzYUxFlqiWXH+M2M+vkf9dAP+fAvdM8rrIIqQfVCZ1HaKOyA3M+evYwfsxdAWihcQ8QNUNSdRRBDlPMygmPq1Kv+viaI2lR6CndbmG2LhaRrBtkw5AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 42.405063291139236%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABSElEQVR42p1SyU6EQBDlz/0L7579Br14M9GJjnHCBMYIDDDYDHs3vcCzq1ESvWklL1U0Va9WzxiDadKYYRzI1vp/mOcZ3jAMSA4NkrcBcdiDFdySEvHknEgTlFKg5ASyF0goKaGtLYRwbx7nAsGW4/BisN9IsMygPDOc8hM452jbFlVVOdK6blA3ravkt1DylfCw43jfaYRbiXNubFCFIAjAGEMURQjD0AVUVY1jmkHbKheZMavOKvOTcP/UI3xW8DcjWEqBJXzfR1mWiOPYkZNzlhdIjqkbCYnK7iFfL2HSO5tkciPwhBjxkQrbqkKRSPSN/aGVa5VIuq5D0zSuTaqi7/u15e7hGvXNBYbHK2g5Wn9NFXJrjF+L0Hboal0G6eUKlqV8f7tlaPvW55DpLVQXgYtxqdA5SOXYCVr95VQoqa3czOvZfAIDY2mtZue/3gAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Premium Account Card&quot;
-        title=&quot;Premium Account Card&quot;
+        title=&quot;&quot;
         src=&quot;/static/c8ba7a3dbaafb87d452a3dcedc972bda/f058b/user-card-premium.png&quot;
         srcset=&quot;/static/c8ba7a3dbaafb87d452a3dcedc972bda/c26ae/user-card-premium.png 158w,
 /static/c8ba7a3dbaafb87d452a3dcedc972bda/6bdcf/user-card-premium.png 315w,
@@ -643,6 +1317,7 @@ the avatar.&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/td&gt;
@@ -1050,7 +1725,7 @@ is recommended to keep all repositories within a single folder.  For example:&lt
     - repository-2/
     (...)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Considering John Doe works at the company &lt;em&gt;xyz&lt;/em&gt; and his email is
-&lt;em&gt;j.doe@xyz.com&lt;/em&gt;, let’s create a &lt;strong&gt;new file&lt;/strong&gt; containing the additional info that
+&lt;em&gt;&lt;a href=&quot;mailto:j.doe@xyz.com&quot;&gt;j.doe@xyz.com&lt;/a&gt;&lt;/em&gt;, let’s create a &lt;strong&gt;new file&lt;/strong&gt; containing the additional info that
 should only be used for work-related repositories:&lt;/p&gt;
 &lt;h4&gt;1. Create a new file:&lt;/h4&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ touch ~/my-workspace/xyz/.gitconfig-work&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1272,8 +1947,12 @@ machine with the following steps:&lt;/p&gt;
 &lt;/ol&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ chmod +x /usr/local/bin/vs-code-bundler&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;Open the file we created and paste the script&lt;/li&gt;
-&lt;li&gt;Test the script&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open the file we created and paste the script&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Test the script&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Run the command below to get your existing extensions and dump into a file.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ vs-code-bundler dump&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1325,12 +2004,12 @@ each scenario and check if things are working as expected.&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 38.60759493670886%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB8klEQVQoz12SXWyLURjHz6w0jK2W4t1K1N0y91xJ1EqHRBZdWBHNSCUidUE667q5oMzaMtGMNEJs5mOtr3uJsW+E6Lt2WxDCZCGzhITrn/Oel144yS/P1/85Oec5R4xMTXPt8Wt6n+r09GcLtvuJ6d8dzBXoGxgnPaCTHtSVr3JDOaUblfsYS1QfSlLh60CTVO6JUbozimNvnFX74ti8ZxAbT0iaES6Juw1Rc9LE3WrmDDaEsO1q5/PsT4QjmKTy2OUCdhk7m1KsPH4F+9Ek8w/GWRBIUOyPUVEfosoXpKohyLL6ZoobE1hlzXIgRklDO7mP3xBrxp5h/6Gjzb5hxfcs2lyW5YYv0WTsmNNZ/TvHopfP6WtbC1cFpAQdrS6sUzrOX+NKVx5JkX83I0+YvM3ingy27gxl/1F6wyCNrTeD5cItdge8XGpaTzK0Dk/Aj6UrzdKbGUqu91F2uJOJD18RS3ackjMKU1QTQWySKNui4nnuiJmXWDxyZtvOIuo6EdsT0o9S9K/uCrOw7jS5T/LK2n5ZdIelQA68VjZtlXgiWL1RNH8Cm+8czsBFqo904Ww8j9giH6FW6j0tpt7o2xymXOqmjUd59X6GO/IL3B+e4N5wXpEZyqv4wYjJo7FJxcPRSVVTur/W0Bn9L95+Ud/mDwLohuVmP1xRAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 38.60759493670886%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB7ElEQVR42m3SX0hTURzA8bO2dNqfFatsa61G9FA99ORb1Foaa2oEQUtKIcsYZC8rcbXNEctS/DdC3WwRhLA9BxXdRU89BNMtzHQhs6yHKCGwgiB6+HbuXQ2KLnz4/e45v/O7lx9HPJ1+w9D954w9mmTkYbYc/+S3lVxZUpnijjKpUXNtLZNjVNYp+SLqI3a138LW3KfZdqof87GoFu3SpuM96PZ3IVQHJFcYcTBS4gppa9r+vk6qm66xuLSMsPvj1HQlsKgCCcyXx7AHk1gD42yQubEjRtXFGIbzwzi8fmpbfNSe9rHV24nBV9qrlDUVJ3oovFtC7Mg+Y+P3WazLM2yWrF9eadHyO7dJ238WME7nuRfeC3cFJAV9ESdV8zM4fsyx5dssqwJx5oofEbbBCarH05gSadb+JcUaVTyFKZlG3ztBU9tJopecRP1OXGfPYBhMsU7urY6nMbYNUFiUf7hezkw4r6CrkzM5FCxbId/19VJdyUp3N6LxJpVHh6iQhOc6oj6ITq13XUXfEOH1e9nQcS6GOCwbNMpBN3Sjk8SRMCbvDSytA9S09LP7wgh7OkbZ2T6McMuPe2QTT6hUr55zhzA39/Lh81dEQXZ9kJ1HyRV5/A/1KqievFggI2Mmv/DfGvX8y7eftGvzCzKlh34Qy4ezAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Traditional Approach&quot;
-        title=&quot;Traditional Approach&quot;
+        title=&quot;&quot;
         src=&quot;/static/98aa19d5bc7b830b8b483512c6e404c4/f058b/traditional-approach.png&quot;
         srcset=&quot;/static/98aa19d5bc7b830b8b483512c6e404c4/c26ae/traditional-approach.png 158w,
 /static/98aa19d5bc7b830b8b483512c6e404c4/6bdcf/traditional-approach.png 315w,
@@ -1341,6 +2020,7 @@ each scenario and check if things are working as expected.&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -1357,12 +2037,12 @@ each scenario and check if things are working as expected.&lt;/p&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 39.24050632911392%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAACKUlEQVQoz22QW0gTYBTHv01nkWUW9RQVgRS+2INC9ZAUupWYzpIw1CjRVhqYlzXULS85sWHKzEsKgkWIkvN+S0tN5zZJH8LygjHBB+upIJBKs359alEPPfw5l/85nB9HrK6t8eK1m+axaWyOaVqcM7SPz9IxPrcR/6d171+1u2bpmZhn+esKosUxw4GEMg4lWfFPruTI9Qq2XihEqHMQYXcQZ9dl+p2bNnXG9Df/450yYLGNISq6xmUzB5+YYnwuFbPjohlVVD4iMp99V0vZf6UEP105AakPCUyrYVdMESIiD6W2AOV6jMxDdV4ChGSRUfcMUdUzIWnuIjTySkg24pw0w+VSqBFlWC4iyoJXhBlPSarSFm7UQi2p1EZ5VM6Fm1FqZB1swPDoOaK+z0HQ5Wv46q2IW1X4xekJTM7E43Y1Cl0Zx2J1HEyXi5k17IzPJTjpJt6Z5YjUSvzjMziaYkCVVYuIM2Oo60cMDHTirvDmxOdRPD4sUJQbir33JLtZYtvwCO+yt5DuLkXx4xOaByaWavcQsPwKz8V5qozH6R0Mx4ePeNlspFk7Ef3OSbSJUfjeq0aYHxMQr0OTnoii9AlCX402NpLD+fIl9xvZm2gkWhfNdoskKqgnKC6B0/obKKyNiJQSLE2jiG/ff9I2+Z7Wobd0v3xDs8tNo32BrqEpuu3TNLgWsY3M0T08RZtzngbHIh3Dm7NPXQs02d10Dk7R55zjy8oqvwAL8ociQ+mjVQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 39.24050632911392%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAACKklEQVR42l2OW0gTYBiGf7c1d6GIF9pNGAR5URcaRFIhGNhUSp1gqCWYmpoUmbZO23Slc5phBxNXHhBbRggqMzPLmSmaB8y0IGeSoWEQdRVYI6unf86L6OLhe3/e9/u/V6y4f+IYc2F/No19YIZ7kvuDb7w8f02rxKPX5rr+H4/X/uIt3767ES3902zKqGbrsRtsy68lNK8Gv6QyxH4jPrHFiDhJjMk7Y9fxvP9BFVeCiDzLre5xRHX7sAwZ8E+twD+lAr9kC2rdZRS6UkKyrstjVwk9XkNYwW12FdUTcMiCSPT6qgQzqsRLqJPLEfvOY3kwKD/sGEVoS1Fq5eVoA6r4ctQHrWtaEWfGN6mKDQdKUWhNaHTSS7giPaPcMaKMt8psuXd3rx5r2xDijmOAPUczCTTW4nPGxvb000Sc0qM01qPOryYqI4cQvWxgaCQ4w4w2NwfNxTp8imyEHT7BzsIL+JY0IdLKsHoaPnnUxrQtiPCVCVRL81SaouhwJhDAJ4Ke9jBhDiJnoQ7l769EXzOw2BDM5lUXyoV31J/bwd3hdAL5gmhupazZiegeGiMmO4UAiw1R3ET4kTwiC0+iqGhBXXCT2PRUtphkQ6udjZkmdLmpaKyNCFMTEWlZ7NYXoqqyI7IraXg8ifix+oeemc/0jszRPzrHw6klHONLOEdcOCfm6Xy5TM/oe/pHZumd/ED75DJ9a1kXXVMf6RpfpG94lqFXC7hXf/EXh/mH2jpBVvEAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;TDD Approach&quot;
-        title=&quot;TDD Approach&quot;
+        title=&quot;&quot;
         src=&quot;/static/27084a2e42d15111216f1114342fb272/f058b/tdd-approach.png&quot;
         srcset=&quot;/static/27084a2e42d15111216f1114342fb272/c26ae/tdd-approach.png 158w,
 /static/27084a2e42d15111216f1114342fb272/6bdcf/tdd-approach.png 315w,
@@ -1373,6 +2053,7 @@ each scenario and check if things are working as expected.&lt;/p&gt;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
@@ -1450,7 +2131,7 @@ overengineering and make decisions prematurely. As we know by now, our tests are
 the first consumers of our code, so lean on that and discuss with your peers
 whether this is really a good design. Here are some questions that I often try
 to ask myself:&lt;/p&gt;
-&lt;ul&gt;
+&lt;ul class=&quot;contains-task-list&quot;&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; Is my code easy to maintain?&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; Is my code easy to change?&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; Is my code easy to read?&lt;/li&gt;
