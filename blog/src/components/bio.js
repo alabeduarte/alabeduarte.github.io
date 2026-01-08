@@ -49,23 +49,7 @@ const Bio = () => {
         />
         <div className="bio-social">
           <span>
-            Written by <strong>{author.name}</strong>, {author.summary} at{" "}
-            <a
-              href="https://safetyculture.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              SafetyCulture
-            </a>
-            , formerly{" "}
-            <a
-              href="https://www.thoughtworks.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ThoughtWorks
-            </a>
-            .
+            Written by <strong>{author.name}</strong>, {author.summary}.
           </span>
           <p>Opinions are mine.</p>
           <ul>
